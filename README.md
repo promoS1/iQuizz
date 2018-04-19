@@ -1,2 +1,2 @@
 # iQuizz
-iQuizz
+Projet iQuizz
