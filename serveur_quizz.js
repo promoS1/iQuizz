@@ -18,7 +18,7 @@ var req_commencer = require("./req_commencer.js");
 var req_afficher_formulaire_inscription = require("./req_afficher_formulaire_inscription.js");
 var req_inscrire = require("./req_inscrire.js");
 var req_identifier = require("./req_identifier.js");
-var req_solo_sport = require("./req_solo_sport.js");
+var req_jouer_solo = require("./req_jouer_solo.js");
 
 var req_statique = require("./req_statique.js");
 var req_erreur = require("./req_erreur.js");
@@ -56,8 +56,8 @@ var traite_requete = function (req, res) {
             case '/req_identifier':
                 req_identifier(req, res, query);
                 break;
-			case '/req_solo_sport':
-				req_solo_sport(req, res, query);
+			case '/req_jouer_solo':
+				req_jouer_solo(req, res, query);
 				break;
             default:
                 req_statique(req, res, pathname);
