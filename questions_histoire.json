@@ -1,0 +1,6 @@
+[
+{ "question":"Quelle bataille fut perdue par Napoleon ?", "propositions":["Austerlitz","Iena","Wagram","Waterloo"],"reponse":"Waterloo"},
+{ "question":"Ou Louis XVI est-il reconnu puis arreté après sa fuite ?", "propositions":["Roi-le-Chatel","Conjac","Varennes","Blois"],"reponse":"Varennes"},
+{ "question":"Comment se nomme l'aviation allemande durant la Seconde Guerre Mondiale ?", "propositions":["La Wehrmacht","La Reich Aviazion","La Krietz","La Luftwaffe"],"reponse":"La Luftwaffe"},
+{ "question":"Quel célèbre peintre s'est coupé l'oreille dans un asile ?", "propositions":["Pablo Picasso","Arthur Rimbaud","Gustave Courbet","Vincent Van Gogh"],"reponse":"Vincent Van Gogh"}
+]
