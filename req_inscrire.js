@@ -64,7 +64,7 @@ var trait = function (req, res, query) {
 		taille_mdp = nouveauMembre.mdp.length;
         listeMembres[listeMembres.length] = nouveauMembre;
 			
-			if ( taille_compte > 4 && taille_mdp > 4 ) {
+			if ( taille_compte >= 4 && taille_mdp >= 4 ) {
         		contenu_fichier = JSON.stringify(listeMembres);
 
         		fs.writeFileSync("membres.json", contenu_fichier, 'utf-8');
@@ -84,7 +84,7 @@ var trait = function (req, res, query) {
        			 marqueurs.erreur = "ERREUR : Veuillez entrez un pseudo qui contient au moins 4 caractères";
         		 marqueurs.compte = query.compte;
        			 page = page.supplant(marqueurs);
-   			 } else if (taille_mdp < 4) {
+   			 } else if (taille_mdp <= 4) {
         		page = fs.readFileSync( 'formulaire_inscription.html', 'utf-8');
        			marqueurs = {};
         		marqueurs.compte = query.compte;
