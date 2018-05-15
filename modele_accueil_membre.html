@@ -1,39 +1,45 @@
 <!DOCTYPE html>
 <html>
-
+<head>
 <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+<style>
+span.center {
+	display :inline-block;
+	width :auto;
+	height :25px;
+	padding :5px;
+}	
+</style>
+</head>
 
+<body>
 <h2>Bienvenue !</h2>                                
 <p>
-<style= padding-left:300px; text align: right>
 <a href="/"><h4>Deconnexion</h4></a>
 </p>
-<p/>
+<p>
 Bonjour <em>{compte}<em>
 </p>
 
 <strong><h2 style="text-align:center">THEME :</strong>
-	<form action="/req_solo" method="get">
-		<select name="Theme">
-			<option value="sport">sport</option>
-			<option value="Pub">Publicite</option>
-			<option value="CG">Culture General</option>
-			<option value="Histoire">Histoire</option>
-		</select>
-		<p>
+	<form action="/req_jouer_solo" method="GET">
+		<select name="theme">
+			<option value="sport">Sport</option>
+			<option value="pub">Publicite</option>
+			<option value="cg">Culture General</option>
+			<option value="histoire">Histoire</option>
+		</select> <br>
+			<input type="hidden" name="compte" value="{compte}">
+<span class="center">
 			<button>Jouer Solo</button>
-			<input type ="submit" name="buton" value="Defier">
-		</p>
-	</form>
-			<p>
-		
-			</P>
+</span>
+		</form><form action="/req_defier" method="GET"> 
+			<input type="hidden" name="compte" value="{compte}">
+		`	<span class="center"> <button>Defier</button>
+			<input type="hidden" name="theme" value="{theme}">
+	</span>	
+		</form>
 </h2>
-
-
-
-
-
-
+</body>
 </html>
 

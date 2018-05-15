@@ -14,10 +14,9 @@ var trait = function (req, res, query) {
 	var chaine;
 	var quest;
 	var compte;
-	var pseudo;
+	var compteur;
 	var theme;
-	var i = 0;
-	var j;
+	var i ;
 	var questions;
 	var question;
 	var proposition1;
@@ -31,22 +30,53 @@ var trait = function (req, res, query) {
 		if ( query.theme === "sport" ) {	
 				chaine = fs.readFileSync("questions_sport.json","utf-8");
 				questions = JSON.parse(chaine);
-
+				compteur = questions[question].length;
+				i = Math.floor(Math.random() * compteur) + 1;
 
 				marqueurs["question"] = questions[i].question;
 				marqueurs["proposition1"] = questions[i].proposition[0];
 				marqueurs["proposition2"] = questions[i].proposition[1];
 				marqueurs["proposition3"] = questions[i].proposition[2];
-						}
-					page = page.supplant(marqueurs);	
+				page = page.supplant(marqueurs);
+		} else if ( query.theme === "pub" ) {
+			chaine = fs.readFileSync("questions_pub.json","utf-8");
+			questions = JSON.parse(chaine);
+
+			marqueurs["question"] = questions[i].question;
+			marqueurs["proposition1"] = questions[i].proposition[0];	
+			marqueurs["proposition2"] = questions[i].proposition[1];
+			marqueurs["proposition3"] = questions[i].proposition[2];
+			page = page.supplant(marqueurs);
+		} else if ( query.theme === "cg" ) {
+            chaine = fs.readFileSync("questions_cg.json","utf-8");
+            questions = JSON.parse(chaine);
+
+            marqueurs["question"] = questions[i].question;
+            marqueurs["proposition1"] = questions[i].proposition[0];
+            marqueurs["proposition2"] = questions[i].proposition[1];
+            marqueurs["proposition3"] = questions[i].proposition[2];
+			page = page.supplant(marqueurs);
+        } else if ( query.theme === "histoire" ) {
+            chaine = fs.readFileSync("questions_histoire.json","utf-8");
+            questions = JSON.parse(chaine);
+
+            marqueurs["question"] = questions[i].question;
+            marqueurs["proposition1"] = questions[i].proposition[0];
+            marqueurs["proposition2"] = questions[i].proposition[1];
+			marqueurs["proposition3"] = questions[i].proposition[2];
+			page = page.supplant(marqueurs);
+        }
+
 
 	fs.writeFileSync( query.compte + ".json",JSON.stringify(quest),"utf-8");
 	marqueurs = {};
-	marqueurs.compte = "";
+	marqueurs.compte = query.compte;
+	marqueurs.theme = query.theme;
+	page = page.supplant(marqueurs);
 
-    res.writeHead(200, {'Content-Type': 'text/html'});
-    res.write(page);
-    res.end();
+	res.writeHead(200, {'Content-Type': 'text/html'});
+	res.write(page);
+	res.end();
 };
 //--------------------------------------------------------------------------
 
