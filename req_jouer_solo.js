@@ -14,6 +14,7 @@ var trait = function (req, res, query) {
 	var chaine;
 	var quest;
 	var compte;
+	var numero;
 	var compteur;
 	var theme;
 	var i;
@@ -30,51 +31,51 @@ var trait = function (req, res, query) {
 				chaine = fs.readFileSync("questions_sport.json","utf-8");
 				questions = JSON.parse(chaine);
 				compteur = questions.length;
-				compteur = compteur - 1;
-				i = Math.floor(Math.random() * compteur) + 1;
+				i = Math.floor(Math.random() * compteur) + 0;
 
 				marqueurs["question"] = questions[i].question;
 				marqueurs["proposition1"] = questions[i].proposition[0];
 				marqueurs["proposition2"] = questions[i].proposition[1];
 				marqueurs["proposition3"] = questions[i].proposition[2];
+				marqueurs["numero"] = questions[i].numero;
 				page = page.supplant(marqueurs);
 		} else if ( query.theme === "pub" ) {
 			chaine = fs.readFileSync("questions_pub.json","utf-8");
 			questions = JSON.parse(chaine);
 			compteur = questions.length;
-			compteur = compteur - 1;
-			i = Math.floor(Math.random() * compteur) + 1;
+			i = Math.floor(Math.random() * compteur) + 0;
 
 			marqueurs["question"] = questions[i].question;
 			marqueurs["proposition1"] = questions[i].proposition[0];	
 			marqueurs["proposition2"] = questions[i].proposition[1];
 			marqueurs["proposition3"] = questions[i].proposition[2];
+			marqueurs["numero"] = questions[i].numero;
 			page = page.supplant(marqueurs);
 		} else if ( query.theme === "cg" ) {
             chaine = fs.readFileSync("questions_cg.json","utf-8");
             questions = JSON.parse(chaine);
 			compteur = questions.length;
-			compteur = compteur - 1;
-			i = Math.floor(Math.random() * compteur) + 1;
+			i = Math.floor(Math.random() * compteur) + 0;
 
 
             marqueurs["question"] = questions[i].question;
             marqueurs["proposition1"] = questions[i].proposition[0];
             marqueurs["proposition2"] = questions[i].proposition[1];
             marqueurs["proposition3"] = questions[i].proposition[2];
+			marqueurs["numero"] = questions[i].numero;
 			page = page.supplant(marqueurs);
         } else if ( query.theme === "histoire" ) {
             chaine = fs.readFileSync("questions_histoire.json","utf-8");
             questions = JSON.parse(chaine);
 			compteur = questions.length;
-			compteur = compteur - 1;
-			i = Math.floor(Math.random() * compteur) + 1;
+			i = Math.floor(Math.random() * compteur) + 0;
 
 
             marqueurs["question"] = questions[i].question;
             marqueurs["proposition1"] = questions[i].proposition[0];
             marqueurs["proposition2"] = questions[i].proposition[1];
 			marqueurs["proposition3"] = questions[i].proposition[2];
+			marqueurs["numero"] = questions[i].numero;
 			page = page.supplant(marqueurs);
         }
 
