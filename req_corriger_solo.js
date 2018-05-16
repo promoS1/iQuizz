@@ -15,8 +15,9 @@ var trait = function (req, res, query) {
 	var theme;
 	var choix;
 	var i;
+	var j;
 	var questions;
-	var reponse_q;
+	var bonne_reponse;
 	var question;
 	var proposition;
 	var no_question;
@@ -41,7 +42,7 @@ var trait = function (req, res, query) {
 
 	//CORRIGE , COMMENTE LA QUESTION
 
-	if ( query.choix === questions.bonne_reponse ){
+	if ( query.choix === questions[i].bonne_reponse ){
 		page = fs.readFileSync('modele_correction_solo.html', 'utf-8');
 		marqueurs["question"] = questions[i].question;
 		marqueurs["selection"] = questions[i].proposition[query.choix];
@@ -49,10 +50,11 @@ var trait = function (req, res, query) {
 		resultat++;
 		page = page.supplant(marqueurs);
 	} else {
+	j = questions[i].bonne_reponse;
 		page = fs.readFileSync('modele_correction_solo.html', 'utf-8');
 		marqueurs["question"] = questions[i].question;
 		marqueurs["selection"] = questions[i].proposition[query.choix];
-		marqueurs["commentaire"] = "Vous avez faux, la bonne reponse est ";//+questions[i].proposition[bonne_reponse] ;
+		marqueurs["commentaire"] = "Vous avez faux, la bonne reponse est "+questions[i].proposition[j] ;
 		page = page.supplant(marqueurs);
 	};
 marqueurs = {};
