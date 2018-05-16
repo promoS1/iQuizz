@@ -25,7 +25,7 @@ var trait = function (req, res, query) {
 	var proposition2;
 	var proposition3;
 	
-	// TIRE AU SORT.....
+	// TIRE AU SORT DU THEME CHOISI PAR LE JOUEUR
 	
 	if ( query.theme === "sport" ) {	
 		chaine = fs.readFileSync("questions_sport.json","utf-8");
