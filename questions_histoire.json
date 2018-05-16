@@ -1,6 +1,6 @@
 [
-{ "question":"Quelle bataille fut perdue par Napoleon ?", "proposition":["Austerlitz","Wagram","Waterloo"],"reponse":"3", "numero":"1"},
-{ "question":"Ou Louis XVI est-il reconnu puis arreté après sa fuite ?", "proposition":["Roi-le-Chatel","Varennes","Blois"],"reponse":"2", "numero":"2"},
-{ "question":"Comment se nomme l'aviation allemande durant la Seconde Guerre Mondiale ?", "proposition":["La Wehrmacht","La Reich Aviazion","La Luftwaffe"],"reponse":"3", "numero":"3"},
-{ "question":"Quel célèbre peintre s'est coupé l'oreille dans un asile ?", "proposition":["Pablo Picasso","Gustave Courbet","Vincent Van Gogh"],"reponse":"3", "numero":"4"}
+{ "question":"Quelle bataille fut perdue par Napoleon ?", "proposition":["Austerlitz","Wagram","Waterloo"],"reponse":"2"},
+{ "question":"Ou Louis XVI est-il reconnu puis arreté après sa fuite ?", "proposition":["Roi-le-Chatel","Varennes","Blois"],"reponse":"1"},
+{ "question":"Comment se nomme l'aviation allemande durant la Seconde Guerre Mondiale ?", "proposition":["La Wehrmacht","La Reich Aviazion","La Luftwaffe"],"reponse":"2"},
+{ "question":"Quel célèbre peintre s'est coupé l'oreille dans un asile ?", "proposition":["Pablo Picasso","Gustave Courbet","Vincent Van Gogh"],"reponse":"2"}
 ]

@@ -24,7 +24,7 @@ var trait = function (req, res, query) {
 
     contenu_fichier = fs.readFileSync("membres.json", 'utf-8');    
     listeMembres = JSON.parse(contenu_fichier);
-
+		
     // ON VERIFIE QUE LE PSEUDO/PASSWORD EXISTE
 
     trouve = false;

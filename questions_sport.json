@@ -1,6 +1,6 @@
 [
-{ "question":"Ballon d'or 2017", "proposition":["Messi","CR7","neymar"],"reponse":"2", "numero":"1"},
-{ "question":"Soulier d'or 2014", "proposition":["Messi","CR7","robben"],"reponse":"1", "numero":"2"},
-{ "question":"Quel est l'age de Michel platini", "proposition":["72","48","71"],"reponse":"1", "numero":"3"},
-{ "question":"LE joueur le plus titre du football", "proposition":["Messi","CR7","neymar"],"reponse":"2", "numero":"4"}
+{ "question":"Ballon d'or 2017 ?", "proposition":["Messi","CR7","neymar"],"bonne_reponse":1},
+{ "question":"Soulier d'or 2014 ?", "proposition":["Messi","CR7","robben"],"bonne_reponse":0},
+{ "question":"Quel est l'age de Michel platini ?", "proposition":["72","48","71"],"bonne_reponse":0},
+{ "question":"LE joueur le plus titre du football ?", "proposition":["Messi","CR7","neymar"],"bonne_reponse":1}
 ]

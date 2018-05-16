@@ -14,43 +14,40 @@ var trait = function (req, res, query) {
 	var compte;
 	var theme;
 	var choix;
-	var stop = true;
-	var i = 0;
-	var j = 0;
+	var i;
 	var questions;
+	var reponse_q;
 	var question;
-	var proposition1;
-	var proposition2;
-	var proposition3;
-	var resultat = 0;
+	var proposition;
+	var no_question;
+	var resultat;
+
+	resultat = 0;
 
 	//CORRIGER LA  QUESTION , INCREMENTATION OU DECREMENTATION DU SCORE , AFFICHER LA QUESTION SUIVANTE
 
-	page = fs.readFileSync('modele_correction_solo.html', 'utf-8');
+	if ( query.theme === "sport" ) {
+
 	chaine = fs.readFileSync("questions_sport.json","utf-8");
 	questions = JSON.parse(chaine);
+	i = Number(query.no_question);
 
-		if ( query.theme === "sport" ) {
-			marqueurs["question"] = questions[j].question;
-			marqueurs["proposition1"] = questions[j].proposition[0];
-			marqueurs["proposition2"] = questions[j].proposition[1];
-			marqueurs["proposition3"] = questions[j].proposition[2];
-			marqueurs["resultat"] = resultat;
-			page = page.supplant(marqueurs);
-
-
-			if ( query.choix === question.reponse ) {
-				marqueurs["reb"] = "Bravo Vous avez Bon !!!!";
-				marqueurs["prop"] = "La Bonne Réponse était " + questions.reponse;
-				stop = false;
-				j=i+1;
-				page = fs.readFileSync('modele_correction_solo.html', 'utf-8');
-			} else {
-
-			};
+		if ( query.choix === query.reponse_q ) {
+		page = fs.readFileSync('modele_correction_solo.html', 'utf-8');
+				marqueurs["question"] = questions[i].question;
+				marqueurs["selection"] = questions[i].proposition[query.choix];
+				marqueurs["commentaire"] = "Bravo, c'est la bonne reponse" ;
+				resultat++;
+				page = page.supplant(marqueurs);
 		} else {
+				page = fs.readFileSync('modele_correction_solo.html', 'utf-8');
+                marqueurs["question"] = questions[i].question;
+                marqueurs["selection"] = questions[i].proposition[query.choix];
+                marqueurs["commentaire"] = "Bravo, c'est la bonne reponse" ;
+				page = page.supplant(marqueurs);
 
 		};
+};
 
 	marqueurs = {};
 	marqueurs.compte = "";
