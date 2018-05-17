@@ -27,6 +27,7 @@ var trait = function (req, res, query) {
 	var proposition3;
 	var chaine;
 	var player = [];
+	var Quest = [];
 
 
 	// TIRE AU SORT DU THEME CHOISI PAR LE JOUEUR
@@ -49,6 +50,7 @@ var trait = function (req, res, query) {
 	
 	check = false;
 	j = 0;
+	Quest = query.no_question;
 
 	chaine = fs.readFileSync("registered.json","UTF-8");
 	register = JSON.parse(chaine);
@@ -61,7 +63,7 @@ var trait = function (req, res, query) {
 
 		} else if (check === false){
 			player[0].Theme = query.theme;
-			player[1].Question = query.no_question;
+			player[1].Question = Quest;
 			player[2].Score = Compteur;
 			chaine2 = JSON.stringify(player);
 			fs.writeFileSync("Suivi_" + query.compte + ".json", chaine2 , "UTF-8");
