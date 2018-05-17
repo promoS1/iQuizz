@@ -18,6 +18,7 @@ var trait = function (req, res, query) {
 	var compteur;
 	var theme;
 	var i;
+	var j;
 	var questions;
 	var reponse_q;
 	var question;
@@ -25,10 +26,12 @@ var trait = function (req, res, query) {
 	var proposition2;
 	var proposition3;
 	var chaine;
-	var register;
-	
+	var player = [];
+	var Quest = [];
+
+
 	// TIRE AU SORT DU THEME CHOISI PAR LE JOUEUR
-	
+
 	if ( query.theme === "sport" ) {	
 		chaine = fs.readFileSync("questions_sport.json","utf-8");
 	} else if ( query.theme === "pub" ) {
@@ -38,7 +41,7 @@ var trait = function (req, res, query) {
 	} else if ( query.theme === "histoire" ) {
 		chaine = fs.readFileSync("questions_histoire.json","utf-8");
 	}
-		
+
 	questions = JSON.parse(chaine);
 	compteur = questions.length;
 	i = Math.floor(Math.random() * compteur);
@@ -60,27 +63,47 @@ var trait = function (req, res, query) {
 	check[0] = 
 	
 */
+	/*/ CREATION FICHIER PERSONNEL SUIVI DU QCM
+	
+	check = false;
+	j = 0;
+	Quest = query.no_question;
 
+	chaine = fs.readFileSync("registered.json","UTF-8");
+	register = JSON.parse(chaine);
 
-	// AFFICHAGE DES QUESTIONS
+	while(j<register.legth && check === false) {
+		if(register[j].query.compte === 1) {
+			check = true;
+		}
+		j++;
 
-	page = fs.readFileSync('modele_questionnaire_solo.html', 'utf-8');
+		} else if (check === false){
+			player[0].Theme = query.theme;
+			player[1].Question = Quest;
+			player[2].Score = Compteur;
+			chaine2 = JSON.stringify(player);
+			fs.writeFileSync("Suivi_" + query.compte + ".json", chaine2 , "UTF-8");
+*/
+			// AFFICHAGE DES QUESTIONS
 
-	marqueurs = {};
-	marqueurs.compte = query.compte;
-	marqueurs.theme = query.theme;
-	marqueurs["question"] = questions[i].question;
-	marqueurs["proposition1"] = questions[i].proposition[0];
-	marqueurs["proposition2"] = questions[i].proposition[1];
-	marqueurs["proposition3"] = questions[i].proposition[2];
-	marqueurs["numero"] = i;
+			page = fs.readFileSync('modele_questionnaire_solo.html', 'utf-8');
 
-	page = page.supplant(marqueurs);
+			marqueurs = {};
+			marqueurs.compte = query.compte;
+			marqueurs.theme = query.theme;
+			marqueurs["question"] = questions[i].question;
+			marqueurs["proposition1"] = questions[i].proposition[0];
+			marqueurs["proposition2"] = questions[i].proposition[1];
+			marqueurs["proposition3"] = questions[i].proposition[2];
+			marqueurs["numero"] = i;
 
-	res.writeHead(200, {'Content-Type': 'text/html'});
-	res.write(page);
-	res.end();
-};
+			page = page.supplant(marqueurs);
+
+			res.writeHead(200, {'Content-Type': 'text/html'});
+			res.write(page);
+			res.end();
+		};
 //--------------------------------------------------------------------------
 
 module.exports = trait;

@@ -15,15 +15,15 @@ var trait = function (req, res, query) {
 	var theme;
 	var choix;
 	var i;
-	var j;
 	var questions;
 	var bonne_reponse;
 	var question;
 	var proposition;
 	var no_question;
 	var resultat;
-
-	resultat = 0;
+	var player = [];
+	var j;
+	 resultat = 0;
 
 	//TIRE AU SORT DU THEME CHOISI PAR LE JOUEUR
 
@@ -41,22 +41,28 @@ var trait = function (req, res, query) {
 	questions = JSON.parse(chaine);
 	i = Number(query.no_question);
 
-	//CORRIGE , COMMENTE LA QUESTION
+	//CORRIGE , COMMENTE LA QUESTION , MODIFIE SCORE 
+
+	//chaine2 = fs.readFileSync("Suivi_" + query.compte + ".json","UTF-8");
+	//player = JSON.parse(chaine2);
 
 	if ( query.choix === questions[i].bonne_reponse ){
 		page = fs.readFileSync('modele_correction_solo.html', 'utf-8');
 		marqueurs["question"] = questions[i].question;
 		marqueurs["selection"] = questions[i].proposition[query.choix];
 		marqueurs["commentaire"] = "Bravo, c'est la bonne reponse" ;
-		resultat++;
+		//player[2].Score = resultat++;
+		//player[1].
 		page = page.supplant(marqueurs);
 	} else {
-	j = questions[i].bonne_reponse;
+		j = questions[i].bonne_reponse;
 		page = fs.readFileSync('modele_correction_solo.html', 'utf-8');
 		marqueurs["question"] = questions[i].question;
 		marqueurs["selection"] = questions[i].proposition[query.choix];
 		marqueurs["commentaire"] = "Vous avez faux, la bonne reponse est "+questions[i].proposition[j] ;
 		page = page.supplant(marqueurs);
+
+
 	};
 
 	marqueurs = {};
