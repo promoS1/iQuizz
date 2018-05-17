@@ -46,7 +46,7 @@ var trait = function (req, res, query) {
 	compteur = questions.length;
 	i = Math.floor(Math.random() * compteur);
 
-	// CREATION FICHIER PERSONNEL SUIVI DU QCM
+	/*/ CREATION FICHIER PERSONNEL SUIVI DU QCM
 	
 	check = false;
 	j = 0;
@@ -67,7 +67,7 @@ var trait = function (req, res, query) {
 			player[2].Score = Compteur;
 			chaine2 = JSON.stringify(player);
 			fs.writeFileSync("Suivi_" + query.compte + ".json", chaine2 , "UTF-8");
-
+*/
 			// AFFICHAGE DES QUESTIONS
 
 			page = fs.readFileSync('modele_questionnaire_solo.html', 'utf-8');
