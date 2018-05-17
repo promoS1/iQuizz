@@ -1,20 +1,39 @@
-
 <!DOCTYPE html>
 <html>
-
+<head>
 <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
-
-<h2>Mon PI</h2>
-
+<style type="text/css">
+	label
+	{
+	vertical-align: top;
+	font-family: Impact;
+	font-size: 100%;
+	display: inline-block;
+	}
+	body {
+		background-image: url("ibackground.jpg");
+		background-size: 600px 500px;
+		background-repeat: repeat-x;
+		opacity: 0.75;
+	}
+	label,input {
+		opacity: 500;
+	}
+</style>
+</head>
+<body>
+<center>
+<fieldset>
+<legend><img src="iQuizz.png" width="100" height="100"></legend>
 {erreur}
 
 <p/>
 
 <form action="/req_identifier" method="GET"> 
-    <input type="text" name="compte" value="{compte}"> 
+    <b><label> Nom d'utilisateur </label> <input type="text" name="compte" value="{compte}"> 
     <br/>
-    <input type="text" name="mdp" value="">
-    <br/>
+    <label> Mot de passe </label> <input type="text" name="mdp" value="" placeholder="***********">
+    <br/><p></b>
     <input type="submit" name="action" value="Se connecter">
 </form>
 
@@ -24,4 +43,8 @@
     <button name="action" value="creer">Créer compte</button>
 </form>
 
+</fieldset>
+</center>
+
+</body>
 </html>

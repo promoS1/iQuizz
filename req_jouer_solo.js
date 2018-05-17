@@ -43,7 +43,7 @@ var trait = function (req, res, query) {
 	compteur = questions.length;
 	i = Math.floor(Math.random() * compteur);
 
-	// CREATION FICHIER PERSONNEL SUIVI DU QCM
+	/*// CREATION FICHIER PERSONNEL SUIVI DU QCM
 	chaine = fs.readFileSync("registered.json","UTF-8");
 	register = JSON.parse(chaine);
 
@@ -59,7 +59,7 @@ var trait = function (req, res, query) {
 	
 	check[0] = 
 	
-
+*/
 
 
 	// AFFICHAGE DES QUESTIONS

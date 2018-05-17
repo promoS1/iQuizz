@@ -8,7 +8,7 @@ var fs = require("fs");
 require('remedial');
 
 var trait = function (req, res, query) {
-	var marqueurs = [];
+	var marqueurs ;
 	var page;
 	var chaine;
 	var compte;
@@ -37,6 +37,7 @@ var trait = function (req, res, query) {
 		chaine = fs.readFileSync("questions_histoire.json","utf-8");
 	}
 
+	marqueurs = [];
 	questions = JSON.parse(chaine);
 	i = Number(query.no_question);
 
@@ -57,10 +58,12 @@ var trait = function (req, res, query) {
 		marqueurs["commentaire"] = "Vous avez faux, la bonne reponse est "+questions[i].proposition[j] ;
 		page = page.supplant(marqueurs);
 	};
-marqueurs = {};
-marqueurs.compte = "";
-marqueurs.theme = "";
-		page = page.supplant(marqueurs);
+
+	marqueurs = {};
+	marqueurs.compte = query.compte;
+	marqueurs.theme = query.theme;
+	page = page.supplant(marqueurs);
+
 	res.writeHead(200, {'Content-Type': 'text/html'});
 	res.write(page);
 	res.end();
