@@ -43,27 +43,33 @@ var trait = function (req, res, query) {
 
 	//CORRIGE , COMMENTE LA QUESTION , MODIFIE SCORE 
 
-	//chaine2 = fs.readFileSync("Suivi_" + query.compte + ".json","UTF-8");
-	//player = JSON.parse(chaine2);
+	chaine = fs.readFileSync(query.compte + ".json","UTF-8");
+	suivi = JSON.parse(chaine);
 
 	if ( query.choix === questions[i].bonne_reponse ){
 		page = fs.readFileSync('modele_correction_solo.html', 'utf-8');
 		marqueurs["question"] = questions[i].question;
 		marqueurs["selection"] = questions[i].proposition[query.choix];
 		marqueurs["commentaire"] = "Bravo, c'est la bonne reponse" ;
-		//player[2].Score = resultat++;
-		//player[1].
+		suivi.score = +1;
+		suivi.questions = [];
+		suivi.questions.push = query.no_question;
+
 		page = page.supplant(marqueurs);
 	} else {
 		j = questions[i].bonne_reponse;
 		page = fs.readFileSync('modele_correction_solo.html', 'utf-8');
 		marqueurs["question"] = questions[i].question;
 		marqueurs["selection"] = questions[i].proposition[query.choix];
-		marqueurs["commentaire"] = "Vous avez faux, la bonne reponse est "+questions[i].proposition[j] ;
+		marqueurs["commentaire"] = "Vous avez faux, la bonne reponse est "+questions[i].proposition[j];
+		suivi.questions = [];
+		suivi.questions.push = query.no_questions;
 		page = page.supplant(marqueurs);
 
 
 	};
+		chaine = JSON.stringify(suivi);
+		fs.writeFileSync(query.pseudo + ".json",chaine,"UTF-8");
 
 	marqueurs = {};
 	marqueurs.compte = query.compte;
