@@ -59,9 +59,8 @@ var trait = function (req, res, query) {
 	marqueurs["question"] = questions[i].question;
 	marqueurs["selection"] = questions[i].proposition[query.choix];
 	if ( query.choix === questions[i].bonne_reponse ){
-	//registre["no_question"].push = i;
 		marqueurs["commentaire"] = "Bravo, c'est la bonne reponse" ;
-		resultat++;
+		
 	} else {
 		j = questions[i].bonne_reponse;
 		marqueurs["commentaire"] = "Vous avez faux, la bonne reponse est "+questions[i].proposition[j] ;
