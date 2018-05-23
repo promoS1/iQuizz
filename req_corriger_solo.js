@@ -21,9 +21,21 @@ var trait = function (req, res, query) {
 	var proposition;
 	var no_question;
 	var resultat;
-	var player = [];
+	var nouveau;
+	var registre;
+	var objet;
 	var j;
-	 resultat = 0;
+
+	resultat = 0;
+
+	query.choix = Number(query.choix);
+
+	//APPEL FICHIER SUIVI JOUEUR
+
+	objet = fs.readFileSync("suivi_"+ query.compte +".json","UTF-8");
+	registre = JSON.parse(objet);
+
+	//registre["no_question"] = [];
 
 	//TIRE AU SORT DU THEME CHOISI PAR LE JOUEUR
 
@@ -43,35 +55,24 @@ var trait = function (req, res, query) {
 
 	//CORRIGE , COMMENTE LA QUESTION , MODIFIE SCORE 
 
-	chaine = fs.readFileSync(query.compte + ".json","UTF-8");
-	suivi = JSON.parse(chaine);
-
+	page = fs.readFileSync('modele_correction_solo.html', 'utf-8');
+	marqueurs["question"] = questions[i].question;
+	marqueurs["selection"] = questions[i].proposition[query.choix];
 	if ( query.choix === questions[i].bonne_reponse ){
-		page = fs.readFileSync('modele_correction_solo.html', 'utf-8');
-		marqueurs["question"] = questions[i].question;
-		marqueurs["selection"] = questions[i].proposition[query.choix];
+	//registre["no_question"].push = i;
 		marqueurs["commentaire"] = "Bravo, c'est la bonne reponse" ;
-		suivi.score = +1;
-		suivi.questions = [];
-		suivi.questions.push = query.no_question;
-
-		page = page.supplant(marqueurs);
+		resultat++;
 	} else {
 		j = questions[i].bonne_reponse;
-		page = fs.readFileSync('modele_correction_solo.html', 'utf-8');
-		marqueurs["question"] = questions[i].question;
-		marqueurs["selection"] = questions[i].proposition[query.choix];
-		marqueurs["commentaire"] = "Vous avez faux, la bonne reponse est "+questions[i].proposition[j];
-		suivi.questions = [];
-		suivi.questions.push = query.no_questions;
-		page = page.supplant(marqueurs);
-
+		marqueurs["commentaire"] = "Vous avez faux, la bonne reponse est "+questions[i].proposition[j] ;
 
 	};
-		chaine = JSON.stringify(suivi);
-		fs.writeFileSync(query.pseudo + ".json",chaine,"UTF-8");
+	page = page.supplant(marqueurs);
 
-	marqueurs = {};
+	objet = JSON.stringify(registre);
+	fs.writeFileSync("suivi_"+ query.compte +".json", objet ,"UTF-8");
+
+	//marqueurs = {};
 	marqueurs.compte = query.compte;
 	marqueurs.theme = query.theme;
 	page = page.supplant(marqueurs);

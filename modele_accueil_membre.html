@@ -24,7 +24,7 @@ Bonjour <em>{compte}<em>
 <strong><h2 style="text-align:center">THEME :</strong>
 	<form action="/req_jouer_solo" method="GET">
 		<select name="theme">
-			<option value="sport">Sport</option>
+			<option value="sport" selected="selected">Sport</option>
 			<option value="pub">Publicite</option>
 			<option value="cg">Culture General</option>
 			<option value="histoire">Histoire</option>
@@ -33,13 +33,20 @@ Bonjour <em>{compte}<em>
 <span class="center">
 			<button>Jouer Solo</button>
 </span>
-		</form><form action="/req_defier" method="GET"> 
-			<input type="hidden" name="compte" value="{compte}">
-		`	<span class="center"> <button>Defier</button>
-			<input type="hidden" name="theme" value="{theme}">
+	</form>
+<br><br><hr>
+	<form action="/req_check" action="GET">
+   <select name="theme">
+            <option value="sport" selected="selected">Sport</option>
+            <option value="pub">Publicite</option>
+            <option value="cg">Culture General</option>
+            <option value="histoire">Histoire</option>
+        </select> <br>
+            <input type="hidden" name="compte" value="{compte}">
+		`	<span class="center"> 
+		<button>Defier</button>
 	</span>	
 		</form>
-</h2>
 </body>
 </html>
 
