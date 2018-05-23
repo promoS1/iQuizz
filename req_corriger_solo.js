@@ -59,11 +59,11 @@ var trait = function (req, res, query) {
 	marqueurs["question"] = questions[i].question;
 	marqueurs["selection"] = questions[i].proposition[query.choix];
 	if ( query.choix === questions[i].bonne_reponse ){
-		marqueurs["commentaire"] = "Bravo, c'est la bonne reponse" ;
+		marqueurs["commentaire"] ="Vous avez selectionne :{selection}" +"<br>"+"Bravo, c'est la bonne reponse" ;
 		
 	} else {
 		j = questions[i].bonne_reponse;
-		marqueurs["commentaire"] = "Vous avez faux, la bonne reponse est "+questions[i].proposition[j] ;
+		marqueurs["commentaire"] ="Vous avez selectionne :{selection}"+" <br>"+"Vous avez faux, la bonne reponse est "+questions[i].proposition[j];
 
 	};
 	page = page.supplant(marqueurs);
