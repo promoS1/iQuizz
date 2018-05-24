@@ -32,7 +32,6 @@ var trait = function (req, res, query) {
 	var registre;
 	var nouveau = {};
 
-
 	// TIRE AU SORT DU THEME CHOISI PAR LE JOUEUR
 
 	if ( query.theme === "sport" ) {	

@@ -11,9 +11,9 @@ var trait = function (req, res, query) {
 	var marqueurs;
 	var compte;
     var page;
-    var mdp;
     var theme;
     var i;
+    var mdp;
     var trouve;
     var membre_salon;
     var fichier;
@@ -21,12 +21,12 @@ var trait = function (req, res, query) {
     var liste;
     var test;
 
-// RECUPERATION DU JSON "salon.json"
+	// RECUPERATION DU JSON "salon.json"
 
     fichier = fs.readFileSync("salon.json", 'utf-8');
     listeMembres = JSON.parse(fichier);
 
-//  LE JOUEUR EST DANS LE SALON.JSON
+	//  LE JOUEUR EST DANS LE SALON.JSON
 
     test = false;
 
@@ -40,7 +40,7 @@ var trait = function (req, res, query) {
      }
     }
 
-// NOUVEAU JOUEU  REJOIND LE SALON  
+	// NOUVEAU JOUEU  REJOIND LE SALON  
 
     if(test === false){
         membre_salon = {};
@@ -62,16 +62,16 @@ var trait = function (req, res, query) {
     liste= "";
     for (i = 0; i < listeMembres.length; i++) {
         if (listeMembres[i].compte !== query.compte && listeMembres[i].etat === "connecté" && listeMembres[i].libre === "oui") {
-            liste += "<form action = 'req_defier' method='GET'><input type = 'hidden' name='compte' value='"+ query.compte +"'><input type='submit' name='adversaire' value='"+ listeMembres[i].compte +"'></form>";
+            liste += "<form action = 'req_defier' method='GET'><input type = 'hidden' name='compte' value='"+ query.compte +"'><input type= 'hidden' name= 'theme' value='"+ query.theme +"'><input type='submit' name='adversaire' value='"+ listeMembres[i].compte +"'></form>";
      }
     }
 
-    page = fs.readFileSync('modele_joueurs_connectes.html', 'UTF-8');
+    page = fs.readFileSync("modele_joueurs_connectes.html", "UTF-8");
 
     marqueurs = {};
     marqueurs.compte = query.compte;
-    marqueurs.mdp = query.mdp;
     marqueurs.theme = query.theme;
+    marqueurs.mdp = query.mdp;
     marqueurs.adversaire = query.adversaire;
     marqueurs.joueurs = liste;
     page = page.supplant(marqueurs);
@@ -79,10 +79,8 @@ var trait = function (req, res, query) {
     res.writeHead(200, {'Content-Type': 'text/html'});
     res.write(page);
     res.end();
-}
+};
 
 //---------------------------------------------------------------------------
 
 module.exports = trait;
-
-

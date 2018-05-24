@@ -19,6 +19,8 @@ var req_afficher_formulaire_inscription = require("./req_afficher_formulaire_ins
 var req_inscrire = require("./req_inscrire.js");
 var req_identifier = require("./req_identifier.js");
 var req_check = require("./req_check.js");
+var req_actualiser_salon = require("./req_actualiser_salon.js");
+var req_defier = require("./req_defier.js");
 var req_jouer_solo = require("./req_jouer_solo.js");
 var req_corriger_solo = require("./req_corriger_solo.js");
 
@@ -60,6 +62,12 @@ var traite_requete = function (req, res) {
                 break;
             case '/req_check':
                 req_check(req, res, query);
+                break;
+            case '/req_actualiser_salon':
+                req_actualiser_salon(req, res, query);
+                break;
+            case '/req_defier':
+                req_defier(req, res, query);
                 break;
 			case '/req_jouer_solo':
 				req_jouer_solo(req, res, query);

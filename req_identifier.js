@@ -60,13 +60,14 @@ var trait = function (req, res, query) {
 
         page = fs.readFileSync('modele_accueil_membre.html', 'UTF-8');
     
-//---------------------------------------------------------------------------
-//----------------- TRAITEMENT  SALON DE JEU DEFIER------------------
+		//------------------------------------------------------------------
+		//----------------- TRAITEMENT  SALON DE JEU DEFIER------------------
 
         contenu_fichier_s = fs.readFileSync("salon.json", 'utf-8');
         listeMembres_s = JSON.parse(contenu_fichier_s);
 
-// SI LE JOUEUR EST DÉJA DANS LE SALON.JSON
+		// SI LE JOUEUR EST DÉJA DANS LE SALON.JSON
+
 		trouve_s = false;
         for(i = 0; i < listeMembres_s.length; i++){
             if(listeMembres_s[i].compte === query.compte){
@@ -74,13 +75,11 @@ var trait = function (req, res, query) {
 				listeMembres_s[i].etat = "connecté";
 				listeMembres_s[i].libre = "non";
                 contenu_fichier_s = JSON.stringify(listeMembres_s);
-                fs.writeFileSync("salon.json", contenu_fichier_s, 'utf-8');  
+                fs.writeFileSync("salon.json", contenu_fichier_s, "utf-8");  
             }
         }
 
-
-// SINON 
-        
+		// SINON 
 		if(trouve_s === false){
 			membre_salon = {};
             membre_salon.compte = query.compte;
@@ -89,15 +88,15 @@ var trait = function (req, res, query) {
             listeMembres_s.push(membre_salon);
 
             contenu_fichier_s = JSON.stringify(listeMembres_s);
-            fs.writeFileSync("salon.json", contenu_fichier_s, 'utf-8');
+            fs.writeFileSync("salon.json", contenu_fichier_s, "utf-8");
         }
-				page = fs.readFileSync('modele_accueil_membre.html', 'UTF-8');
+		page = fs.readFileSync('modele_accueil_membre.html', "utf-8");
 
-	}
-        marqueurs = {};
+	};
+		marqueurs = {};
 		marqueurs.compte = query.compte;
+		marqueurs.adversaire = query.adversaire;
         marqueurs.mdp = query.mdp;
-        marqueurs.adversaire = query.adversaire;
         page = page.supplant(marqueurs);
 
     res.writeHead(200, {'Content-Type': 'text/html'});

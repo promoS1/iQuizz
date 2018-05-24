@@ -1,8 +1,9 @@
-<!DOCTYPE>
+<!DOCTYPE html>
 <html>
     <head>
-        <title>Salon</title>
+		<meta http-equiv="refresh" content="3 ; url=/req_actualiser_salon?compte={compte}&theme={theme}&mdp={mdp}">
         <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+        <title>Salon</title>
     </head>
 
     <body>
@@ -13,13 +14,14 @@
 <h3> Vous avez choisi de competir sur le theme {theme}, pour continuer selectionnez le joueur que vous aimeriez defier !!!</h3>
     <fieldset>
         <center><strong><u><h1>Membres connectés :</h1></center></strong></u>
-        ... <br> <br>
+        <br>
 
         {joueurs}    
+		<br>...
   <hr><br>
-       <form action="/req_identifier?compte={compte}&mdp={mdp}&action=Se+connecter" method="GET">
+       <a href ="/req_identifier?compte={compte}&mdp={mdp}&action=Se+connecter">
         <button>Retour à l'accueil</button>
-    </form>
+		</a>
 
     </fieldset> <br><br>
    <br>
@@ -28,7 +30,3 @@
 </body>
 
 </html>
-
-
-
-

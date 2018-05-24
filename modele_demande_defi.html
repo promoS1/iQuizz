@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta http-equiv = 'content-Type' content='text/html; charset="utf-8"' />
+</head>
+
+<body>
+
+   <fieldset>
+
+        <center><h1><em>{adversaire}</em> souhaite vous défier sur le theme {theme} !</h1>
+            <h3>Souhaitez-vous relever le challenge ?</h3> 
+
+            <hr>
+        <form action = "/req_defier_oui" method = "get">
+            <input type = "hidden" name = "compte" value = "{compte}">
+            <input type = "hidden" name = "adversaire" value = "{adversaire}">
+			<button>Commencez la partie</button>
+        </form><br>
+
+		<a href ="/req_identifier?compte={compte}&mdp={mdp}&action=Se+connecter">
+			<button>Retour à l'accueil</button>
+        </a><center>
+	</fieldset>
+
+</body>
+
+</html>
