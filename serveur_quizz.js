@@ -18,9 +18,11 @@ var req_commencer = require("./req_commencer.js");
 var req_afficher_formulaire_inscription = require("./req_afficher_formulaire_inscription.js");
 var req_inscrire = require("./req_inscrire.js");
 var req_identifier = require("./req_identifier.js");
-var req_check = require("./req_check.js");
+var req_salon = require("./req_salon.js");
 var req_actualiser_salon = require("./req_actualiser_salon.js");
 var req_defier = require("./req_defier.js");
+var req_attendre_reponse = require("./req_attendre_reponse.js");
+var req_defier_oui = require("./req_defier_oui.js");
 var req_jouer_solo = require("./req_jouer_solo.js");
 var req_corriger_solo = require("./req_corriger_solo.js");
 
@@ -60,14 +62,20 @@ var traite_requete = function (req, res) {
             case '/req_identifier':
                 req_identifier(req, res, query);
                 break;
-            case '/req_check':
-                req_check(req, res, query);
+            case '/req_salon':
+                req_salon(req, res, query);
                 break;
             case '/req_actualiser_salon':
                 req_actualiser_salon(req, res, query);
                 break;
             case '/req_defier':
                 req_defier(req, res, query);
+                break;
+            case '/req_attendre_reponse':
+                req_attendre_reponse(req, res, query);
+                break;
+            case '/req_defier_oui':
+                req_defier_oui(req, res, query);
                 break;
 			case '/req_jouer_solo':
 				req_jouer_solo(req, res, query);

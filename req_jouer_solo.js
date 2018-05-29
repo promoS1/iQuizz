@@ -18,10 +18,12 @@ var trait = function (req, res, query) {
 	var compteur;
 	var theme;
 	var i;
+	var n;
 	var j;
 	var questions;
 	var reponse_q;
 	var question;
+	var resultat;
 	var no_question_repondu;
 	var no_question;
 	var proposition1;
@@ -52,6 +54,8 @@ var trait = function (req, res, query) {
 	
 	nouveau.theme = query.theme;
 	nouveau.no_question_repondu = [ ];
+	nouveau.n = 0;
+	nouveau.resultat = 0;
 	registre = JSON.stringify(nouveau);
 
 	// CREATION FICHIER PERSONNEL SUIVI DU QCM

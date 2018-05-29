@@ -15,13 +15,17 @@
             <hr>
         <form action = "/req_defier_oui" method = "get">
             <input type = "hidden" name = "compte" value = "{compte}">
+            <input type = "hidden" name = "theme" value = "{theme}">
             <input type = "hidden" name = "adversaire" value = "{adversaire}">
 			<button>Commencez la partie</button>
         </form><br>
-
-		<a href ="/req_identifier?compte={compte}&mdp={mdp}&action=Se+connecter">
-			<button>Retour à l'accueil</button>
-        </a><center>
+			<h3>ou allez vous vous defilez ?!</h3>
+		<form action="/req_identifier?compte={compte}&mdp={mdp}&action=Se+connecter">
+		<input type="hidden" name="mdp" value="{mdp}">
+		<input type="hidden" name="compte" value="{compte}">
+		<button>Retour à l'accueil</button>
+		</form>	
+        </a></center>
 	</fieldset>
 
 </body>

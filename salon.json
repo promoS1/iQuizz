@@ -1,1 +1,1 @@
-[{"compte":"morgan","etat":"attente","libre":"oui","adversaire":"papa"},{"compte":"aaaaa","etat":"connecté","libre":"non"},{"compte":"papa","etat":"attente","libre":"oui","adversaire":"morgan"}]
+[{"compte":"morgan","etat":"joue","libre":"oui","adversaire":"latyr"},{"compte":"aaaaa","etat":"connecté","libre":"non","adversaire":"latyr"},{"compte":"papa","etat":"attente","libre":"oui","adversaire":"morgan"},{"compte":"latyr","etat":"attente","libre":"oui","adversaire":"morgan"}]
