@@ -39,9 +39,10 @@ var trait = function (req, res, query) {
 			x = i;
 			compte = query.compte;
             adversaire = liste_membres[i].adversaire;
-				if(liste_membres[i].etat === "connecté") {
-					page = fs.readFileSync('modele_refus_defie.html','utf-8');
-				} else if(liste_membres[i].etat === "joue") {
+				if (liste_membres[i].etat === "connecté") {
+					console.log(liste_membres[i].etat);
+					page = fs.readFileSync("modele_refus_defie.html","utf-8");
+				} else if (liste_membres[i].etat === "joue") {
 					page = fs.readFileSync("modele_questionnaire_multi.html", "utf-8");
 				} else {
 					page = fs.readFileSync("modele_attendre_reponse.html", "utf-8");

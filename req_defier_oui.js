@@ -32,17 +32,18 @@ var trait = function (req, res, query) {
 
 	contenu_fichier = fs.readFileSync("salon.json" , "utf-8");
 	liste_membres = JSON.parse(contenu_fichier);
-		for (j = 0; j < liste_membres.length; j++) {
-			if(liste_membres[j].compte === query.compte) {
-				adversaire = liste_membres[j].adversaire;
-				liste_membres[j].etat = "joue" ;
-					for (j = 0; j < liste_membres.length; j++) {
-						if (liste_membres[j].compte === adversaire) {
-							liste_membres[j].etat = "joue";
-						}	
-					}
+	for (j = 0; j < liste_membres.length; j++) {
+		if(liste_membres[j].compte === query.compte) {
+			adversaire = liste_membres[j].adversaire;
+			liste_membres[j].etat = "joue" ;
+			for (j = 0; j < liste_membres.length; j++) {
+				if (liste_membres[j].compte === adversaire) {
+					liste_membres[j].etat = "joue";
+					liste_membres[j].id = "id";
+				}	
 			}
 		}
+	}
 
 	//ECRIE DANS SALON AVEC LE NOUVEAU STATUS DES JOUEURS
 
@@ -77,6 +78,7 @@ var trait = function (req, res, query) {
 	liste.score1 = 0;//SCORE DU JOUEUR DEFIE
 	liste.joueur2 = adversaire;
 	liste.score2 = 0;//SCORE DU JOUEUR QUI DEFIE
+	liste.n = 0;
 
 	partie = JSON.stringify(liste);
 	contenu = fs.writeFileSync("partie_"+ adversaire +"_vs_"+ query.compte +".json", partie ,"UTF-8");
