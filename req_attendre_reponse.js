@@ -22,7 +22,6 @@ var trait = function (req, res, query) {
     var questions;
     var proposition;
     var hote;
-    var hote;
     var page;
     var marqueurs;
 
@@ -40,11 +39,10 @@ var trait = function (req, res, query) {
 			compte = query.compte;
             adversaire = liste_membres[i].adversaire;
 				if (liste_membres[i].etat === "connecté") {
-					console.log(liste_membres[i].etat);
-					page = fs.readFileSync("modele_refus_defie.html","utf-8");
+					page = fs.readFileSync("modele_refus_defie.html", "utf-8");
 				} else if (liste_membres[i].etat === "joue") {
 					page = fs.readFileSync("modele_questionnaire_multi.html", "utf-8");
-				} else {
+				} else if (liste_membres[i].etat !=="connecté" && liste_membres[i].etat !== "joue" ) {
 					page = fs.readFileSync("modele_attendre_reponse.html", "utf-8");
 				}
 		}
