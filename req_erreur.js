@@ -12,10 +12,12 @@ var path = require("path");
 
 var show_erreur = function (req, res, query) {
 
-    res.writeHead(200, {'Content-Type': 'text/plain'});
+	var page;
 
-    res.write('ERREUR SERVEUR');
+	page = fs.readFileSync("modele_erreur.html");
 
+    res.writeHead(200, {'Content-Type': 'text/html'});
+    res.write(page);
     res.end();
 };
 

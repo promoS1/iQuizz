@@ -75,10 +75,11 @@ var trait = function (req, res, query) {
 	liste.compte = query.compte;
 	liste.adversaire = adversaire;
 	liste.joueur1 = query.compte ;
-	liste.score1 = 0;//SCORE DU JOUEUR DEFIE
+	liste.score1 = 0;//SCORE DU JOUEUR DEFIE (1)
 	liste.joueur2 = adversaire;
-	liste.score2 = 0;//SCORE DU JOUEUR QUI DEFIE
-	liste.n = 0;
+	liste.score2 = 0;//SCORE DU JOUEUR QUI DEFIE (2)
+	liste.a = [];//COMPTEUR DU DU JOUEUR COMPTE (1)
+	liste.b = [];//COMPTEUR DU DU JOUR HOTE (2)
 
 	partie = JSON.stringify(liste);
 	contenu = fs.writeFileSync("partie_"+ adversaire +"_vs_"+ query.compte +".json", partie ,"UTF-8");

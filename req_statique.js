@@ -11,6 +11,7 @@ var trait = function(req, res, pathname) {
 
     var extension;
     var type;
+    var page;
     var file_path;
     var ressource;
 
