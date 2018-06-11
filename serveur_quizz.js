@@ -23,6 +23,7 @@ var req_actualiser_salon = require("./req_actualiser_salon.js");
 var req_defier = require("./req_defier.js");
 var req_attendre_reponse = require("./req_attendre_reponse.js");
 var req_defier_oui = require("./req_defier_oui.js");
+var req_corriger_duo = require("./req_corriger_duo.js");
 var req_jouer_solo = require("./req_jouer_solo.js");
 var req_corriger_solo = require("./req_corriger_solo.js");
 
@@ -76,6 +77,9 @@ var traite_requete = function (req, res) {
                 break;
             case '/req_defier_oui':
                 req_defier_oui(req, res, query);
+                break;
+            case '/req_corriger_duo':
+                req_corriger_duo(req, res, query);
                 break;
 			case '/req_jouer_solo':
 				req_jouer_solo(req, res, query);

@@ -11,9 +11,12 @@ var trait = function (req, res, query) {
     var page;
     var chaine;
     var compte;
+    var compteur;
     var theme;
     var choix;
     var i;
+    var j;
+    var n;
     var id;
     var questions;
     var partie;
@@ -27,7 +30,6 @@ var trait = function (req, res, query) {
     var score;
     var nouveau;
     var objet;
-    var j;
     var contenu_fichier;
     var liste_membres;
 
@@ -57,9 +59,14 @@ var trait = function (req, res, query) {
 
 	if( partie.compte === query.compte ) {
 		actif = partie.joueur1;
+		score = partie.score1;
+		compteur = partie.a
 	} else if (partie.compte !== query.compte) {
 		actif = partie.adversaire;
+		score = partie.score2;
+		compteur = partie.b;
 	}
+	score = 0;
 
 	console.log(actif);
 
@@ -74,18 +81,53 @@ var trait = function (req, res, query) {
     } else if ( query.theme === "histoire" ) {
         chaine = fs.readFileSync("questions_histoire.json","utf-8");
     }
+	
+	marqueurs = [];
+	questions = JSON.parse(chaine);
+	i = Number(query.no_question);
+	compteur.push(i);
 
+	page = fs.readFileSync("modele_correction_duo.html" , "UTF-8");
+	marqueurs["question"] = questions[i].question;
+	marqueurs["selection"] = questions[i].proposition[query.choix];
 
+	console.log(query.choix);
+	console.log(questions[i].proposition[query.choix]);
 
+	if ( query.choix == questions[i].bonne_reponse ) {
+		marqueurs["commentaire"] = "Vous avez selectionne :{selection}" +"<br>"+"Bravo , c'est la bonne reponse";
+		score = score + 1;
+	} else {
+		n = questions[i].bonne_reponse;
+		marqueurs["commentaire"] = "Vous avez selectionne :{selection}"+" <br>"+"Vous avez faux, la bonne reponse est "+questions[i].proposition[n];
+	}
+	page = page.supplant(marqueurs);
 
+	console.log(score);
+	console.log(compteur);
 
+ if( partie.compte === query.compte ) {
+         partie.score1 = score;
+         partie.a = compteur;
+    } else if (partie.compte !== query.compte) {
+         partie.score2 = score;
+         partie.b = compteur;
+    }
 
+	objet = JSON.stringify(partie);
+	fs.writeFileSync("partie_"+ adversaire +"_vs_"+ compte +".json", objet , "UTF-8");
 
-	marqueurs = {};
-	marqueurs.adversaire =query.adversaire;
+	marqueurs.adversaire = query.adversaire;
+	marqueurs.actif = actif;
+	marqueurs.theme = query.theme;
+	marqueurs.compte = query.compte;
+	
+
+	page = page.supplant(marqueurs);
+
 
 	res.writeHead(200, {'Content-Type': 'text/html'});
-    //res.write(page);
+    res.write(page);
     res.end();
 };
 //=========================================================
