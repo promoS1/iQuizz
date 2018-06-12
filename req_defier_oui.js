@@ -52,15 +52,7 @@ var trait = function (req, res, query) {
 
 	// TIRE AU SORT DU THEME PAR LE JOUEUR
 
-    if ( query.theme === "sport" ) {
-        chaines = fs.readFileSync("questions_sport.json","utf-8");
-    } else if ( query.theme === "pub" ) {
-        chaines = fs.readFileSync("questions_pub.json","utf-8");
-    } else if ( query.theme === "cg" ) {
-        chaines = fs.readFileSync("questions_cg.json","utf-8");
-    } else if ( query.theme === "histoire" ) {
-        chaines = fs.readFileSync("questions_histoire.json","utf-8");
-	}
+	chaines = fs.readFileSync("questions_"+ query.theme +".json","utf-8");
 
 	//ON SELECTIONNE UN i ALEATOIRE
 

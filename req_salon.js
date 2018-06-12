@@ -71,7 +71,6 @@ var trait = function (req, res, query) {
     marqueurs = {};
     marqueurs.compte = query.compte;
     marqueurs.theme = query.theme;
-    marqueurs.mdp = query.mdp;
     marqueurs.adversaire = query.adversaire;
     marqueurs.joueurs = liste;
     page = page.supplant(marqueurs);

@@ -38,31 +38,18 @@ var trait = function (req, res, query) {
 			x = i;
 			compte = query.compte;
             adversaire = liste_membres[i].adversaire;
-				if (liste_membres[i].etat === "connecté") {
-					page = fs.readFileSync("modele_refus_defie.html", "utf-8");
-				} else if (liste_membres[i].etat === "joue") {
-					page = fs.readFileSync("modele_questionnaire_multi.html", "utf-8");
-				} else if (liste_membres[i].etat !=="connecté" && liste_membres[i].etat !== "joue" ) {
-					page = fs.readFileSync("modele_attendre_reponse.html", "utf-8");
-				}
 		}
 	}
 
-	//LE PROCESSUS DE LA PARTIE SOLO S'EXECUTE 
+	//LE PROCESSUS DE LA PARTIE MULTI S'EXECUTE  
 
 	if (liste_membres[x].etat === "joue") {
 
-	 // TIRE AU SORT DU THEME PAR LE JOUEUR
+		page = fs.readFileSync("modele_questionnaire_multi.html", "utf-8");
 
-		if ( query.theme === "sport" ) {
-			chaines = fs.readFileSync("questions_sport.json","utf-8");
-		} else if ( query.theme === "pub" ) {
-			chaines = fs.readFileSync("questions_pub.json","utf-8");
-		} else if ( query.theme === "cg" ) {
-			chaines = fs.readFileSync("questions_cg.json","utf-8");
-		} else if ( query.theme === "histoire" ) {
-			chaines = fs.readFileSync("questions_histoire.json","utf-8");
-		}
+	 // CHOIX DU THEME PAR LE JOUEUR
+
+	chaines = fs.readFileSync("questions_"+ query.theme + ".json","utf-8");
 
 	 //ON SELECTIONNE UN j ALEATOIRE
 
@@ -75,23 +62,32 @@ var trait = function (req, res, query) {
 		page = fs.readFileSync("modele_questionnaire_multi.html", "utf-8");
 
 		marqueurs = {};
-		marqueurs.compte = query.compte;
-		marqueurs.theme = query.theme;
-		marqueurs.mdp = query.mdp;
-		marqueurs.adversaire = adversaire;
 		marqueurs["question"] = questions[j].question;
 		marqueurs["proposition1"] = questions[j].proposition[0];
 		marqueurs["proposition2"] = questions[j].proposition[1];
 		marqueurs["proposition3"] = questions[j].proposition[2];
 		marqueurs["numero"] = j;
 
-		page = page.supplant(marqueurs);
+		page = page.supplant(marqueurs);		
+	
+	} else if (liste_membres[x].etat ==="attente") {
+	 page = fs.readFileSync("modele_attendre_reponse.html", "utf-8");
+	} else if (liste_membres[x].etat === "connecté") {
+		page = fs.readFileSync("modele_refus_defie.html", "utf-8");
+	}
+
+		marqueurs = {};
+		marqueurs.compte = query.compte;
+		marqueurs.theme = query.theme;
+		marqueurs.mdp = query.mdp;
+		marqueurs.adversaire = adversaire;
+
+		page = page.supplant(marqueurs);		
 
 		res.writeHead(200, {'Content-type': 'text/html'});
 		res.write(page);
 		res.end();
 
-	};
 
 };
 //==================================================
