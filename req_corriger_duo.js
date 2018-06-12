@@ -66,21 +66,12 @@ var trait = function (req, res, query) {
 		score = partie.score2;
 		compteur = partie.b;
 	}
-	score = 0;
 
 	console.log(actif);
 
  //TIRE AU SORT DU THEME CHOISI PAR LE JOUEUR
 
-    if ( query.theme === "sport" ) {
-        chaine = fs.readFileSync("questions_sport.json","utf-8");
-    } else if ( query.theme === "pub" ) {
-        chaine = fs.readFileSync("questions_pub.json","utf-8");
-    } else if ( query.theme === "cg" ) {
-        chaine = fs.readFileSync("questions_cg.json","utf-8");
-    } else if ( query.theme === "histoire" ) {
-        chaine = fs.readFileSync("questions_histoire.json","utf-8");
-    }
+        chaine = fs.readFileSync("questions_"+ query.theme +".json","utf-8");
 	
 	marqueurs = [];
 	questions = JSON.parse(chaine);
