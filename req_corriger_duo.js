@@ -7,7 +7,7 @@ var fs = require("fs");
 require('remedial');
 
 var trait = function (req, res, query) {
-    var marqueurs ;
+    var marqueurs = {} ;
     var page;
     var chaine;
     var compte;
@@ -16,6 +16,8 @@ var trait = function (req, res, query) {
     var choix;
     var i;
     var j;
+    var a;
+    var b;
     var n;
     var id;
     var questions;
@@ -40,10 +42,18 @@ var trait = function (req, res, query) {
 		if(liste_membres[j].compte === query.compte) {
 			if(liste_membres[j].id ==="id") {
 				adversaire = query.compte;
-				compte = liste_membres[j].adversaire;
+				compte = liste_membres[j].adversaire;	
+				marqueurs.adversaire = compte;
+				marqueurs.theme = query.theme;
+				marqueurs.compte = adversaire;
+
 			} else {
 				compte = query.compte;
-				adversaire = liste_membres[j].adversaire;
+				adversaire = liste_membres[j].adversaire;	
+				marqueurs.adversaire = adversaire;
+				marqueurs.theme = query.theme;
+				marqueurs.compte = compte;
+
 				}
 			}
 	}
@@ -73,7 +83,6 @@ var trait = function (req, res, query) {
 
         chaine = fs.readFileSync("questions_"+ query.theme +".json","utf-8");
 	
-	marqueurs = [];
 	questions = JSON.parse(chaine);
 	i = Number(query.no_question);
 	compteur.push(i);
@@ -108,14 +117,20 @@ var trait = function (req, res, query) {
 	objet = JSON.stringify(partie);
 	fs.writeFileSync("partie_"+ adversaire +"_vs_"+ compte +".json", objet , "UTF-8");
 
-	marqueurs.adversaire = query.adversaire;
 	marqueurs.actif = actif;
-	marqueurs.theme = query.theme;
-	marqueurs.compte = query.compte;
-	
-
 	page = page.supplant(marqueurs);
 
+//
+
+ /*   objet = fs.readFileSync("partie_"+ adversaire +"_vs_"+ compte +".json" ,"UTF-8");
+	partie = JSON.parse(objet);
+
+if ( partie.a.length === 4 && partie.b.length < 4 ) {
+	page = readFileSync("modele_attendre_fini.html" , "utf-8")
+} else if (partie.a.length < 4 && partie.b === 4 ) {
+	page = readFileSync("modele_attendre_fini.html" , "utf-8")
+}	
+	page = page.supplant(marqueurs);*/
 
 	res.writeHead(200, {'Content-Type': 'text/html'});
     res.write(page);
