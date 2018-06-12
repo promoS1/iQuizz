@@ -24,6 +24,7 @@ var trait = function (req, res, query) {
         if(liste_membres[j].compte === query.compte) {
             adversaire = liste_membres[j].adversaire;
             liste_membres[j].etat = "connecté" ;
+			liste_membres[j].libre = "non";
             for (j = 0; j < liste_membres.length; j++) {
                 if (liste_membres[j].compte === adversaire) {
                     liste_membres[j].etat = "connecté";

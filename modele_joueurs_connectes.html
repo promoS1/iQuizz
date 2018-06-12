@@ -19,9 +19,10 @@
         {joueurs}    
 		<br>...
   <hr><br>
-       <a href ="/req_identifier?compte={compte}&mdp={mdp}&action=Se+connecter">
+		<form action = "/req_retour" method = "GET" >
+		<input type = "hidden" name ="compte" value="{compte}"/>
         <button>Retour à l'accueil</button>
-		</a>
+		</form>
 
     </fieldset> <br><br>
    <br>
