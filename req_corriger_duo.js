@@ -122,15 +122,15 @@ var trait = function (req, res, query) {
 
 //
 
- /*   objet = fs.readFileSync("partie_"+ adversaire +"_vs_"+ compte +".json" ,"UTF-8");
+    objet = fs.readFileSync("partie_"+ adversaire +"_vs_"+ compte +".json" ,"UTF-8");
 	partie = JSON.parse(objet);
 
 if ( partie.a.length === 4 && partie.b.length < 4 ) {
-	page = readFileSync("modele_attendre_fini.html" , "utf-8")
+	page = fs.readFileSync("modele_attendre_fini.html" , "utf-8")
 } else if (partie.a.length < 4 && partie.b === 4 ) {
-	page = readFileSync("modele_attendre_fini.html" , "utf-8")
+	page = fs.readFileSync("modele_attendre_fini.html" , "utf-8")
 }	
-	page = page.supplant(marqueurs);*/
+	page = page.supplant(marqueurs);
 
 	res.writeHead(200, {'Content-Type': 'text/html'});
     res.write(page);
