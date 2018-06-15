@@ -28,6 +28,7 @@ var req_retour = require("./req_retour.js");
 var req_corriger_duo = require("./req_corriger_duo.js");
 var req_jouer_solo = require("./req_jouer_solo.js");
 var req_corriger_solo = require("./req_corriger_solo.js");
+var req_retourner_menu = require("./req_retourner_menu.js");
 
 var req_statique = require("./req_statique.js");
 var req_erreur = require("./req_erreur.js");
@@ -94,6 +95,9 @@ var traite_requete = function (req, res) {
 				break;
 			case '/req_corriger_solo':
 				req_corriger_solo(req, res, query);
+				break;
+			case '/req_retourner_menu':
+				req_retourner_menu(req, res, query);
 				break;
             default:
                 req_statique(req, res, pathname);

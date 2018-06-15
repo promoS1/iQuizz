@@ -21,6 +21,15 @@ var trait = function (req, res, query) {
 	var taille_compte ;
 	var taille_mdp ;
     var trouve;
+	var nouveau;
+	var nb_question_repondu = [];
+	var pub;
+	var histoire;
+	var cg;
+	var sport;
+	var player_suivi;
+	var nouveau_suivi;
+	var registre;
 
     // ON LIT LES COMPTES EXISTANTS
 
@@ -57,6 +66,11 @@ var trait = function (req, res, query) {
     // SI PAS TROUVE, ON AJOUTE LE NOUVEAU COMPTE DANS LA LISTE DES COMPTES
 
     if (trouve === false) {
+		console.log("test");
+		nouveau = {"histoire":{"nb_question_repondu":[],"score":0,"compteur":0},"pub":{"nb_question_repondu":[],"score":0,"compteur":0},"cg":{"nb_question_repondu":[],"score":0,"compteur":0},"sport":{"nb_question_repondu":[],"score":0,"compteur":0}};
+
+		registre = JSON.stringify(nouveau); 
+		fs.writeFileSync("suivi_"+ query.compte +".json", registre, "UTF-8");
         nouveauMembre = {};
         nouveauMembre.compte = query.compte;
         nouveauMembre.mdp = query.mdp;

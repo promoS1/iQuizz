@@ -16,7 +16,6 @@ var trait = function (req, res, query) {
 	var compte;
 	var numero;
 	var compteur;
-	var theme;
 	var i;
 	var n;
 	var j;
@@ -33,6 +32,7 @@ var trait = function (req, res, query) {
 	var objet;
 	var registre;
 	var nouveau = {};
+	var a = query.theme;
 
 	// TIRE AU SORT DU THEME CHOISI PAR LE JOUEUR
 
@@ -50,18 +50,6 @@ var trait = function (req, res, query) {
 	compteur = questions.length;
 	i = Math.floor(Math.random() * compteur);
 
-	// AJOUT DES INFO COMPTE
-	
-	nouveau.theme = query.theme;
-	nouveau.no_question_repondu = [ ];
-	nouveau.n = 0;
-	nouveau.resultat = 0;
-	registre = JSON.stringify(nouveau);
-
-	// CREATION FICHIER PERSONNEL SUIVI DU QCM
-
-	fs.writeFileSync("suivi_"+ query.compte +".json", registre ,"UTF-8");
-	
 	// FICHIER SUIVI DU JOUEUR
 	objet = fs.readFileSync("suivi_"+ query.compte +".json","UTF-8");
 	registre = JSON.parse(objet);
@@ -79,8 +67,16 @@ var trait = function (req, res, query) {
 			marqueurs["proposition3"] = questions[i].proposition[2];
 			marqueurs["numero"] = i;
 
+
+	console.log("past-marq");
 	no_question = i; 
-	registre["no_question_repondu"].push(no_question);
+	if(registre[a].compteur < 4) {
+		registre[a].nb_question_repondu.push(no_question);
+		registre[a].compteur = registre[a].compteur+1;
+	} else if(registre[a].compteur === 4) {
+		registre[a].compteur = registre[a].compteur;
+	}
+
 	objet = JSON.stringify(registre);
 	fs.writeFileSync("suivi_"+ query.compte +".json", objet ,"UTF-8");
 

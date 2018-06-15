@@ -25,8 +25,7 @@ var trait = function (req, res, query) {
 	var registre;
 	var objet;
 	var j;
-
-	resultat = 0;
+	var qc = query.theme;
 
 	query.choix = Number(query.choix);
 
@@ -34,8 +33,6 @@ var trait = function (req, res, query) {
 
 	objet = fs.readFileSync("suivi_"+ query.compte +".json","UTF-8");
 	registre = JSON.parse(objet);
-
-	//registre["no_question"] = [];
 
 	//TIRE AU SORT DU THEME CHOISI PAR LE JOUEUR
 
@@ -55,23 +52,26 @@ var trait = function (req, res, query) {
 
 	//CORRIGE , COMMENTE LA QUESTION , MODIFIE SCORE 
 
-	page = fs.readFileSync('modele_correction_solo.html', 'utf-8');
-	marqueurs["question"] = questions[i].question;
-	marqueurs["selection"] = questions[i].proposition[query.choix];
-	if ( query.choix === questions[i].bonne_reponse ){
+	if(registre[qc].compteur < 4) {
+		page = fs.readFileSync('modele_correction_solo.html', 'utf-8');
+		marqueurs["question"] = questions[i].question;
+		marqueurs["selection"] = questions[i].proposition[query.choix];	
+	if(query.choix === questions[i].bonne_reponse ){
 		marqueurs["commentaire"] ="Vous avez selectionne :{selection}" +"<br>"+"Bravo, c'est la bonne reponse" ;
-		
+		registre[qc].score = registre[qc].score + 1;	
 	} else {
 		j = questions[i].bonne_reponse;
 		marqueurs["commentaire"] ="Vous avez selectionne :{selection}"+" <br>"+"Vous avez faux, la bonne reponse est "+questions[i].proposition[j];
-
+	}
+	} else if(registre[qc].compteur === 4) {
+		page = fs.readFileSync('modele_fin_solo.html',"UTF-8")
+		marqueurs["commentaire"] = "Vous avez terminé le Quizz : " + query.theme + " Avec un score de : " + registre[qc].score;
 	};
 	page = page.supplant(marqueurs);
 
 	objet = JSON.stringify(registre);
 	fs.writeFileSync("suivi_"+ query.compte +".json", objet ,"UTF-8");
 
-	//marqueurs = {};
 	marqueurs.compte = query.compte;
 	marqueurs.theme = query.theme;
 	page = page.supplant(marqueurs);
