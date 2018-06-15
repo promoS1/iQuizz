@@ -27,6 +27,8 @@ var trait = function (req, res, query) {
     var page;
     var etat;
     var marqueurs;
+	var compteurq;
+	var noq;
 
 	//LE JOUEUR A ACCEPTE LE DEFI , ON L'ATTRIBUT L'ETAT JOUE
 
@@ -44,6 +46,7 @@ var trait = function (req, res, query) {
 			}
 		}
 	}
+	
 
 	//ECRIE DANS SALON AVEC LE NOUVEAU STATUS DES JOUEURS
 
@@ -53,15 +56,12 @@ var trait = function (req, res, query) {
 	// TIRE AU SORT DU THEME PAR LE JOUEUR
 
 	chaines = fs.readFileSync("questions_"+ query.theme +".json","utf-8");
-
-	//ON SELECTIONNE UN i ALEATOIRE
-
-    questions = JSON.parse(chaines);
+	//
+	questions = JSON.parse(chaines);
     compteur = questions.length;
-    i = (Math.floor(Math.random() * compteur));
 
 	//ON ECRIT LES INFOS DE LA PARTIE DANS LE JSON COMMUN AU DEUX JOUEURS
-
+	compteurq = compteur++ ;
 	liste.theme = query.theme;
 	liste.hote = adversaire;
 	liste.compte = query.compte;
@@ -72,11 +72,16 @@ var trait = function (req, res, query) {
 	liste.score2 = 0;//SCORE DU JOUEUR QUI DEFIE (2)
 	liste.a = [];//COMPTEUR DU DU JOUEUR COMPTE (1)
 	liste.b = [];//COMPTEUR DU DU JOUR HOTE (2)
-
+	liste.noq = [2,3,0,1];
 	partie = JSON.stringify(liste);
 	contenu = fs.writeFileSync("partie_"+ adversaire +"_vs_"+ query.compte +".json", partie ,"UTF-8");
 
 	//ON AFFICHE LE QUESTIONNAIRE
+
+	contenu_fichier = fs.readFileSync("partie_"+ adversaire +"_vs_"+ query.compte +".json",  "utf-8");
+    partie  = JSON.parse(contenu_fichier);
+	compteurq = partie.noq.length
+	 i = (Math.floor(Math.random() * compteurq));
 
 	page = fs.readFileSync("modele_questionnaire_multi.html", "utf-8");
 
@@ -84,7 +89,7 @@ var trait = function (req, res, query) {
 	marqueurs.compte = query.compte;
 	marqueurs.theme = query.theme;
 	marqueurs.adversaire = adversaire;
-	marqueurs["question"] = questions[i].question;
+	marqueurs["question"] = questions[i].liste.noq;
 	marqueurs["proposition1"] = questions[i].proposition[0];
 	marqueurs["proposition2"] = questions[i].proposition[1];
 	marqueurs["proposition3"] = questions[i].proposition[2];
