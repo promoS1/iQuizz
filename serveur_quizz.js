@@ -26,6 +26,7 @@ var req_defier_oui = require("./req_defier_oui.js");
 var req_defier_non = require("./req_defier_non.js");
 var req_retour = require("./req_retour.js");
 var req_corriger_duo = require("./req_corriger_duo.js");
+var req_attendre_fin = require("./req_attendre_fin.js");
 var req_jouer_solo = require("./req_jouer_solo.js");
 var req_corriger_solo = require("./req_corriger_solo.js");
 var req_retourner_menu = require("./req_retourner_menu.js");
@@ -72,24 +73,28 @@ var traite_requete = function (req, res) {
             case '/req_actualiser_salon':
                 req_actualiser_salon(req, res, query);
                 break;
-            case '/req_defier':
+	case '/req_defier':
                 req_defier(req, res, query);
                 break;
-            case '/req_attendre_reponse':
+	case '/req_attendre_reponse':
                 req_attendre_reponse(req, res, query);
                 break;
-            case '/req_defier_oui':
+	case '/req_defier_oui':
                 req_defier_oui(req, res, query);
                 break; 
-			case '/req_defier_non':
+	case '/req_defier_non':
                 req_defier_non(req, res, query);
                 break;
-			case '/req_retour':
+	case '/req_retour':
                 req_retour(req, res, query);
                 break;
-            case '/req_corriger_duo':
+	case '/req_corriger_duo':
                 req_corriger_duo(req, res, query);
                 break;
+	case '/req_attendre_fin':
+                req_attendre_fin(req, res, query);
+                break;
+
 			case '/req_jouer_solo':
 				req_jouer_solo(req, res, query);
 				break;

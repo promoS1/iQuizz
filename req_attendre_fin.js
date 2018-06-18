@@ -52,9 +52,9 @@ var trait = function (req, res, query) {
 if ( partie.a.length === 3 && partie.b.length < 3 && query.compte === partie.joueur1 ) {
 	page = fs.readFileSync("modele_attendre_fini.html" , "UTF-8");
 	marqueurs.compte = partie.joueur1;
-	marqueurs.theme = query.theme;
+	marqueurs.theme = partie.theme;
 	marqueurs.adversaire = partie.joueur2;
-
+	page = page.supplant(marqueurs);
 } else if ( partie.a.length === 3 && partie.b.length > 3 && query.compte === partie.joueur1 ) {
                 if (partie.score1 < partie.score2) {
                 marqueurs.compte = partie.joueur1;
@@ -62,21 +62,20 @@ if ( partie.a.length === 3 && partie.b.length < 3 && query.compte === partie.jou
                 marqueurs.score_j = partie.score1;
                 marqueurs.score_a = partie.score2;
                 marqueurs.commentaire = " Vous avez perdu contre " + partie.joueur2 ;
-
                 } else if (partie.score1 > partie.score2) {
                 marqueurs.compte = partie.joueur1;
                 marqueurs.adversaire = partie.joueur2;
                 marqueurs.score_j = partie.score1;
                 marqueurs.score_a = partie.score2;
                 marqueurs.commentaire = " Vous avez gagne contre " + partie.joueur2 ;
-
                 }
+	page = page.supplant(marqueurs);
 } else if (partie.a.length < 3 && partie.b.length === 3 && query.compte === partie.joueur2 ) {
 	page = fs.readFileSync("modele_attendre_fini.html" , "UTF-8");
 	marqueurs.compte = partie.joueur2;
-	marqueurs.theme = query.theme;
+	marqueurs.theme = partie.theme;
 	marqueurs.adversaire = partie.joueur1;
-
+	page = page.supplant(marqueurs);
 } else if ( partie.a.length > 3 && partie.b.length === 3 && query.compte === partie.joueur2 ) {
                 if (partie.score1 < partie.score2) {
                 marqueurs.compte = partie.joueur2;
@@ -90,8 +89,10 @@ if ( partie.a.length === 3 && partie.b.length < 3 && query.compte === partie.jou
                 marqueurs.score_j = partie.score2;
                 marqueurs.score_a = partie.score1;
                 marqueurs.commentaire = " Vous avez perdu contre " + partie.joueur1 ;
-                }
 }
+	page = page.supplant(marqueurs);
+                }
+
 	page = page.supplant(marqueurs);
 
 	res.writeHead(200, {'Content-Type': 'text/html'});
