@@ -79,6 +79,49 @@ var trait = function (req, res, query) {
 		indice = Number(partie.d);
 	} 
 	
+//SI UN JOUEUR FINI AVANT L'AUTRE IL EST DIRIGE VERS UNE ATTENTE PENDANT QUE L'AUTRE FINI SA PARTIE ET AFFICHE LE RESULTAT FINAL
+
+if ( partie.a.length >= 3 && partie.b.length < 3 && query.compte === partie.joueur1 ) {
+	page = fs.readFileSync("modele_attendre_fini.html" , "UTF-8");
+
+	page = page.supplant(marqueurs);
+} else if (partie.a.length < 3 && partie.b.length >= 3 && query.compte === partie.joueur2 ) {
+	page = fs.readFileSync("modele_attendre_fini.html" , "UTF-8");
+
+	page = page.supplant(marqueurs);
+} else if ( partie.a.length > 3 && partie.b.length > 3 && query.compte === partie.joueur1 ) {
+	page = fs.readFileSync("modele_fin_duo.html" , "UTF-8");
+		if (partie.score1 < partie.score2) {
+                marqueurs.compte = partie.joueur1;
+                marqueurs.adversaire = partie.joueur2;
+                marqueurs.score_j = partie.score1;
+                marqueurs.score_a = partie.score2;
+                marqueurs.commentaire = " Vous avez perdu contre " + partie.joueur2 ;
+                } else if (partie.score1 > partie.score2) {
+                marqueurs.compte = partie.joueur1;
+                marqueurs.adversaire = partie.joueur2;
+                marqueurs.score_j = partie.score1;
+                marqueurs.score_a = partie.score2;
+                marqueurs.commentaire = " Vous avez gagne contre " + partie.joueur2 ;
+                }
+	page = page.supplant(marqueurs);
+} else if (partie.a.length > 3 && partie.b.length > 3 && query.compte === partie.joueur2 ) {
+	page = fs.readFileSync("modele_fin_duo.html" , "UTF-8");
+		if (partie.score1 < partie.score2) {
+		marqueurs.compte = partie.joueur2;
+		marqueurs.adversaire = partie.joueur1;
+		marqueurs.score_j = partie.score2;
+		marqueurs.score_a = partie.score1;
+		marqueurs.commentaire = " Vous avez gagne contre " + partie.joueur1;
+		} else if (partie.score1 > partie.score2) {
+		marqueurs.compte = partie.joueur2;
+		marqueurs.adversaire = partie.joueur1;
+		marqueurs.score_j = partie.score2;
+		marqueurs.score_a = partie.score1;
+		marqueurs.commentaire = " Vous avez perdu contre " + partie.joueur1; 
+		}
+	page = page.supplant(marqueurs);
+};
 
 	console.log(actif);
 
@@ -123,53 +166,7 @@ var trait = function (req, res, query) {
 	fs.writeFileSync("partie_"+ adversaire +"_vs_"+ compte +".json", objet , "UTF-8");
 
 	marqueurs.actif = actif;
-
-//SI UN JOUEUR FINI AVANT L'AUTRE IL EST DIRIGE VERS UNE ATTENTE PENDANT QUE L'AUTRE FINI SA PARTIE ET AFFICHE LE RESULTAT FINAL
-
-	objetf = fs.readFileSync("partie_"+ adversaire +"_vs_"+ compte +".json" ,"UTF-8");
-	partief = JSON.parse(objetf);
-
-if ( partief.a.length > 3 && partief.b.length < 3 && query.compte === partief.joueur1 ) {
-	page = fs.readFileSync("modele_attendre_fini.html" , "UTF-8");
-
-	page = page.supplant(marqueurs);
-} else if (partief.a.length < 3 && partief.b.length > 3 && query.compte === partief.joueur2 ) {
-	page = fs.readFileSync("modele_attendre_fini.html" , "UTF-8");
-
-	page = page.supplant(marqueurs);
-} else if ( partief.a.length > 3 && partief.b.length > 3 && query.compte === partief.joueur1 ) {
-	page = fs.readFileSync("modele_fin_duo.html" , "UTF-8");
-		if (partief.score1 < partief.score2) {
-                marqueurs.compte = partief.joueur1;
-                marqueurs.adversaire = partief.joueur2;
-                marqueurs.score_j = partief.score1;
-                marqueurs.score_a = partief.score2;
-                marqueurs.commentaire = " Vous avez perdu contre " + partie.joueur2 ;
-                } else if (partief.score1 > partief.score2) {
-                marqueurs.compte = partief.joueur1;
-                marqueurs.adversaire = partief.joueur2;
-                marqueurs.score_j = partief.score1;
-                marqueurs.score_a = partief.score2;
-                marqueurs.commentaire = " Vous avez gagne contre " + partief.joueur2 ;
-                }
-	page = page.supplant(marqueurs);
-} else if (partief.a.length > 3 && partief.b.length > 3 && query.compte === partief.joueur2 ) {
-	page = fs.readFileSync("modele_fin_duo.html" , "UTF-8");
-		if (partief.score1 < partief.score2) {
-		marqueurs.compte = partief.joueur2;
-		marqueurs.adversaire = partief.joueur1;
-		marqueurs.score_j = partief.score2;
-		marqueurs.score_a = partief.score1;
-		marqueurs.commentaire = " Vous avez gagne contre " + partief.joueur1;
-		} else if (partief.score1 > partief.score2) {
-		marqueurs.compte = partief.joueur2;
-		marqueurs.adversaire = partief.joueur1;
-		marqueurs.score_j = partief.score2;
-		marqueurs.score_a = partief.score1;
-		marqueurs.commentaire = " Vous avez perdu contre " + partief.joueur1; 
-		}
-	page = page.supplant(marqueurs);
-}; 
+ 
 	page = page.supplant(marqueurs);
 
 	res.writeHead(200, {'Content-Type': 'text/html'});
