@@ -11,10 +11,12 @@ var trait = function (req, res, query) {
     var theme;
     var liste = {};
     var i;
+    var x;
     var j;
     var compteur;
     var chaines;
     var partie;
+    var noq;
     var contenu;
     var adversaire;
 	var questions;
@@ -57,8 +59,6 @@ var trait = function (req, res, query) {
 	//ON SELECTIONNE UN i ALEATOIRE
 
     questions = JSON.parse(chaines);
-    compteur = questions.length;
-    i = (Math.floor(Math.random() * compteur));
 
 	//ON ECRIT LES INFOS DE LA PARTIE DANS LE JSON COMMUN AU DEUX JOUEURS
 
@@ -72,11 +72,18 @@ var trait = function (req, res, query) {
 	liste.score2 = 0;//SCORE DU JOUEUR QUI DEFIE (2)
 	liste.a = [];//COMPTEUR DU DU JOUEUR COMPTE (1)
 	liste.b = [];//COMPTEUR DU DU JOUR HOTE (2)
+	liste.c = 0;//INDICE QUESTION DU JOUEUR (1)
+	liste.d = 0;//INDICE QUESTION DU JOUEUR (2)
 
+	liste.noq = [0,1,2,3];
 	partie = JSON.stringify(liste);
 	contenu = fs.writeFileSync("partie_"+ adversaire +"_vs_"+ query.compte +".json", partie ,"UTF-8");
 
 	//ON AFFICHE LE QUESTIONNAIRE
+
+	contenu_fichier = fs.readFileSync("partie_"+ adversaire +"_vs_"+ query.compte +".json",  "utf-8");
+    partie  = JSON.parse(contenu_fichier);
+	 i = partie.noq[0];
 
 	page = fs.readFileSync("modele_questionnaire_multi.html", "utf-8");
 

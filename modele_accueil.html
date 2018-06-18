@@ -1,52 +1,50 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+<link rel="stylesheet" href="bouton.css" type="text/css"/>
 <style type="text/css">
-	label
-	{
+div {
+	background-color: lightgray;
+	border-radius: 10px;
+	width: 300px;
+	padding: 50px;
+	margin: 50px;
+	position: absolute;
+	top: 50px;
+	right: 10px;
+} label
+      {
+	font-family: "Times New Roman";
+	font-style: italic;
+	font-size: 20px;
 	vertical-align: top;
-	font-family: Impact;
-	font-size: 100%;
-	display: inline-block;
-	opacity: 500;
-	}
-	body {
-		background-image: url("ibackground.jpg");
-		background-size: 600px 500px;
-		background-repeat: repeat-x;
-		opacity: 0.75;
-	}
-	input {
-		opacity: 500;
-	}
+        display: inline-block;
+        width: 50px;
+} body {
+    background-image: url("iQg.png");
+}
 </style>
+<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
 <title> Log In </title>
 </head>
 <body>
-<center>
-<fieldset>
-<legend><img src="iQuizz.png" width="200" height="50"></legend>
-{erreur}
 
-<p/>
-
+<p>
+<div>
 <form action="/req_identifier" method="GET"> 
-    <b><label> Nom d'utilisateur </label> <input type="text" name="compte" value="{compte}"> 
-    <br/>
-    <label> Mot de passe </label> <input type="text" name="mdp" value="" placeholder="******">
-    <br/><p></b>
-    <input type="submit" name="action" value="Se connecter">
+    <b><label> Username </label> </br></br><input type="text" name="compte" value="{compte}"> 
+    <br/><br/>
+    <label> Password </label> </br></br><input type="password" name="mdp" value="" placeholder="************">
+    <br/><p></b><center>
+    <button name="action" value="Se connecter" class="button bouton">Se connecter</button>
 </form>
 
-<p/>
+<p/> <h4><u>Inscrivez-vous des maintenant !</u><h4>
 
 <form action="/req_afficher_formulaire_inscription" method="GET">
-    <button name="action" value="creer">Créer compte</button>
-</form>
-
-</fieldset>
-</center>
-
+    <button name="action" value="creer" class="button bouton">Créer compte</button> </center>
+</form><br><br>
+{erreur}
+</div>
 </body>
 </html>

@@ -1,5 +1,5 @@
 //----- CORRIGE--LES-QUESTIONNAIRES--DES--JOUEURS--
-//----PAR--iQuizz-le---05/06/2018-----------------
+//----PAR Morgan MBA le---16/06/2018-----------------
 //================================================
 "use strict";
 
@@ -9,6 +9,7 @@ require('remedial');
 var trait = function (req, res, query) {
     var marqueurs = {} ;
     var page;
+    var pagef;
     var chaine;
     var compte;
     var compteur;
@@ -18,6 +19,7 @@ var trait = function (req, res, query) {
     var j;
     var a;
     var b;
+    var l;
     var n;
     var id;
     var questions;
@@ -30,6 +32,7 @@ var trait = function (req, res, query) {
     var proposition;
     var no_question;
     var score;
+    var indice;
     var nouveau;
     var objet;
     var contenu_fichier;
@@ -58,10 +61,6 @@ var trait = function (req, res, query) {
 			}
 	}
 
-	/*contenu_fichier = JSON.stringify(liste_membres);
-	fs.writeFileSync("salon.json" , contenu_fichier ,"UTF-8");*/
-	
-
     //APPEL DU FICHIER PARTIE COMMUNE AU DEUX JOUEURS 
 
     objet = fs.readFileSync("partie_"+ adversaire +"_vs_"+ compte +".json" ,"UTF-8");
@@ -70,12 +69,15 @@ var trait = function (req, res, query) {
 	if( partie.compte === query.compte ) {
 		actif = partie.joueur1;
 		score = partie.score1;
-		compteur = partie.a
+		compteur = partie.a;
+		indice = Number(partie.c);
 	} else if (partie.compte !== query.compte) {
 		actif = partie.adversaire;
 		score = partie.score2;
 		compteur = partie.b;
-	}
+		indice = Number(partie.d);
+	} 
+	
 
 	console.log(actif);
 
@@ -101,6 +103,7 @@ var trait = function (req, res, query) {
 		n = questions[i].bonne_reponse;
 		marqueurs["commentaire"] = "Vous avez selectionne :{selection}"+" <br>"+"Vous avez faux, la bonne reponse est "+questions[i].proposition[n];
 	}
+
 	page = page.supplant(marqueurs);
 
 	console.log(score);
@@ -109,32 +112,94 @@ var trait = function (req, res, query) {
  if( partie.compte === query.compte ) {
          partie.score1 = score;
          partie.a = compteur;
+         partie.c = indice + 1;
     } else if (partie.compte !== query.compte) {
          partie.score2 = score;
          partie.b = compteur;
-    }
-
+         partie.d = indice + 1;
+    } 
 	objet = JSON.stringify(partie);
 	fs.writeFileSync("partie_"+ adversaire +"_vs_"+ compte +".json", objet , "UTF-8");
 
 	marqueurs.actif = actif;
-	page = page.supplant(marqueurs);
 
-//
+//SI UN JOUEUR FINI AVANT L'AUTRE IL EST DIRIGE VERS UNE ATTENTE PENDANT QUE L'AUTRE FINI SA PARTIE ET AFFICHE LE RESULTAT FINAL
 
-    objet = fs.readFileSync("partie_"+ adversaire +"_vs_"+ compte +".json" ,"UTF-8");
+	objet = fs.readFileSync("partie_"+ adversaire +"_vs_"+ compte +".json" ,"UTF-8");
 	partie = JSON.parse(objet);
 
-if ( partie.a.length === 4 && partie.b.length < 4 ) {
-	page = fs.readFileSync("modele_attendre_fini.html" , "utf-8")
-} else if (partie.a.length < 4 && partie.b === 4 ) {
-	page = fs.readFileSync("modele_attendre_fini.html" , "utf-8")
-}	
+if ( partie.a.length > 3 && partie.b.length < 3 && query.compte === partie.joueur1 ) {
+	pagef = fs.readFileSync("modele_attendre_fini.html" , "UTF-8");
+} else if (partie.a.length < 3 && partie.b.length > 3 && query.compte === partie.joueur2 ) {
+	pagef = fs.readFileSync("modele_attendre_fini.html" , "UTF-8");
+} else if ( partie.a.length > 3 && partie.b.length > 3 && query.compte === partie.joueur1 ) {
+	pagef = fs.readFileSync("modele_fin_duo.html" , "UTF-8");
+		if (partie.score1 < partie.score2) {
+                marqueurs.compte = partie.joueur1;
+                marqueurs.adversaire = partie.joueur2;
+                marqueurs.score_j = partie.score1;
+                marqueurs.score_a = partie.score2;
+                marqueurs.commentaire = " Vous avez perdu contre " + partie.joueur2 ;
+                } else if (partie.score1 > partie.score2) {
+                marqueurs.compte = partie.joueur1;
+                marqueurs.adversaire = partie.joueur2;
+                marqueurs.score_j = partie.score1;
+                marqueurs.score_a = partie.score2;
+                marqueurs.commentaire = " Vous avez gagne contre " + partie.joueur2 ;
+                }
+} else if (partie.a.length > 3 && partie.b.length > 3 && query.compte === partie.joueur2 ) {
+	pagef = fs.readFileSync("modele_fin_duo.html" , "UTF-8");
+		if (partie.score1 < partie.score2) {
+		marqueurs.compte = partie.joueur2;
+		marqueurs.adversaire = partie.joueur1;
+		marqueurs.score_j = partie.score2;
+		marqueurs.score_a = partie.score1;
+		marqueurs.commentaire = " Vous avez gagne contre " + partie.joueur1;
+		} else if (partie.score1 > partie.score2) {
+		marqueurs.compte = partie.joueur2;
+		marqueurs.adversaire = partie.joueur1;
+		marqueurs.score_j = partie.score2;
+		marqueurs.score_a = partie.score1;
+		marqueurs.commentaire = " Vous avez perdu contre " + partie.joueur1; 
+		}
+} /*else if ( partie.a.length === 3 && partie.b.length === 3 && query.compte === partie.joueur2) {
+  page = fs.readFileSync("modele_fin_duo.html" , "UTF-8");
+                if (partie.score1 < partie.score2) {
+                marqueurs.compte = partie.joueur2;
+                marqueurs.adversaire = partie.joueur1;
+                marqueurs.score_j = partie.score2;
+                marqueurs.score_a = partie.score1;
+                marqueurs.commentaire = " Vous avez gagne contre " + partie.joueur1;
+                } else if (partie.score1 > partie.score2) {
+                marqueurs.compte = partie.joueur2;
+                marqueurs.adversaire = partie.joueur1;
+                marqueurs.score_j = partie.score2;
+                marqueurs.score_a = partie.score1;
+                marqueurs.commentaire = " Vous avez perdu contre " + partie.joueur1;
+
+		}
+} else if ( partie.a.length === 3 && partie.b.length === 3 && query.compte === partie.joueur1 ) {
+        page = fs.readFileSync("modele_fin_duo.html" , "UTF-8");
+                if (partie.score1 < partie.score2) {
+                marqueurs.compte = partie.joueur1;
+                marqueurs.adversaire = partie.joueur2;
+                marqueurs.score_j = partie.score1;
+                marqueurs.score_a = partie.score2;
+                marqueurs.commentaire = " Vous avez perdu contre " + partie.joueur2 ;
+                } else if (partie.score1 > partie.score2) {
+                marqueurs.compte = partie.joueur1;
+                marqueurs.adversaire = partie.joueur2;
+                marqueurs.score_j = partie.score1;
+                marqueurs.score_a = partie.score2;
+                marqueurs.commentaire = " Vous avez gagne contre " + partie.joueur2 ;
+                }
+} */
+
 	page = page.supplant(marqueurs);
 
 	res.writeHead(200, {'Content-Type': 'text/html'});
-    res.write(page);
-    res.end();
+	res.write(page);
+	res.end();
 };
 //=========================================================
 module.exports = trait;

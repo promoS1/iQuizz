@@ -1,22 +1,25 @@
-
 <!DOCTYPE html>
 <html>
-
+<head>
 <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
-
+<link rel="stylesheet" href="bouton.css" type="text/css"/>
+</head>
+<a href="req_commencer" class="retour"><img src="retour.png"></a>
 <h2>Formulaire de création de compte</h2>
 
 <body>
-{erreur}
-<p/>
-
+<p>
 <form action="/req_inscrire" method="GET">
-    <label>Pseudo : </label><input type="text" name="compte" value="{compte}" placeholder = "pseudo visiteur">
+    <label>Username : </label><input type="text" name="compte" value="{compte}" placeholder = "pseudo visiteur">
     <br/>
-    <label>Password : </label><input type="text" name="mdp" value="">
+    <label>Password : </label><input type="password" name="mdp" value="">
     <br/>
+<label>Confirmer votre password : </label><input type="password" name="mdp2" value="">
+    <br/>
+
     <button name="action" value="creer">Créer compte</button>
-</form>
+</form><br><br>
+{erreur}
 
 </body>
 </html>

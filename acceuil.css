@@ -1,0 +1,9 @@
+div {
+    background-color: lightgrey;
+    width: 300px;
+    padding: 25px;
+    margin: 25px;
+    position: absolute;
+    top: 90px;
+    right: 16px;
+}
