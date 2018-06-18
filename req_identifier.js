@@ -12,6 +12,7 @@ var trait = function (req, res, query) {
 
     var marqueurs;
     var compte;
+    var erreur;
     var mdp;
     var page;
     var membre;
@@ -51,7 +52,8 @@ var trait = function (req, res, query) {
         page = fs.readFileSync('modele_accueil.html', 'utf-8');
 
         marqueurs = {};
-        marqueurs.erreur = "ERREUR : compte ou mot de passe incorrect";
+        erreur = "<center><font color='red' face='Times New Roman' size='3'><span class='error'><link rel='stylesheet' href='sms.css' type='text/css'/>compte ou mot de passe incorrect</span></font></center>";
+        marqueurs.erreur = erreur;
         marqueurs.compte = query.compte;
         page = page.supplant(marqueurs);
 

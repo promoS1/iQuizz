@@ -21,7 +21,7 @@ var trait = function (req, res, query) {
     var liste;
     var test;
 
-	// RECUPERATION DU JSON "salon.json"
+	// RECUPERATION DU SALON.JSON 
 
     fichier = fs.readFileSync("salon.json", 'utf-8');
     listeMembres = JSON.parse(fichier);

@@ -30,6 +30,9 @@ var trait = function (req, res, query) {
 			liste_membres[j].etat = "connecté" ;
             liste_membres[j].libre = "non";
 		}
+	if ( liste_membres[j].id === "id" ) {
+		liste_membres[j].id = "";
+	}
     }
 
     contenu_fichier = JSON.stringify(liste_membres);

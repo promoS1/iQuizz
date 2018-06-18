@@ -10,26 +10,31 @@ require('remedial');
 
 var trait = function (req, res, query) {
 
-    var marqueurs;
-    var compte;
-    var mdp;
-    var page;
-    var nouveauMembre;
-    var contenu_fichier;
-    var listeMembres;
-    var i;
+	var marqueurs;
+	var erreur;
+	var compte;
+	var mdp;
+	var mdp2;
+	var page;
+	var nouveauMembre;
+	var contenu_fichier;
+	var listeMembres;
+	var i;
 	var taille_compte ;
 	var taille_mdp ;
-    var trouve;
+	var trouve;
 	var nouveau;
 	var nb_question_repondu = [];
 	var pub;
+	var pass;
 	var histoire;
 	var cg;
 	var sport;
 	var player_suivi;
 	var nouveau_suivi;
 	var registre;
+
+	marqueurs = {};
 
     // ON LIT LES COMPTES EXISTANTS
 
@@ -38,19 +43,21 @@ var trait = function (req, res, query) {
 	
 	 // ON VERIFIE SI L'USER SAISIS LES CHAMPS
 
-    if ( query.compte === "" && query.mdp === "" ) {
+    if ( query.compte === "" && query.mdp === "" && query.mdp2 === "" ) {
 
         page = fs.readFileSync('formulaire_inscription.html', 'utf-8');
 
-        marqueurs = {};
-        marqueurs.erreur = " ERREUR : Veuillez saisir tous les champs ";
-    } else if ( query.compte === "" || query.mdp === "" ) {
+	 erreur = "<center><font color='blue' face='Times New Roman' size='3'><span class='info'><link rel='stylesheet' href='sms.css' type='text/css'/>Veuillez saisir tous les champs </span></font></center>";
+	 marqueurs.erreur = erreur;
+	page = page.supplant(marqueurs);
+    } else if ( query.compte === "" || query.mdp === "" || query.mdp2 === ""  ) {
 
         page = fs.readFileSync('formulaire_inscription.html', 'utf-8');
 
-        marqueurs = {};
-        marqueurs.erreur = "ERREUR : Veuillez saisir tous les champs ";
-    };
+	 erreur = "<center><font color='blue' face='Times New Roman' size='3'><span class='info'><link rel='stylesheet' href='sms.css' type='text/css'/>Veuillez saisir tous les champs </span></font></center>";
+         marqueurs.erreur = erreur;
+	page = page.supplant(marqueurs);
+    }
 
     // ON VERIFIE QUE LE COMPTE N'EXISTE PAS DEJA
 
@@ -62,6 +69,12 @@ var trait = function (req, res, query) {
         }
         i++;
     }
+	//VERIFICATION MOT DE PASSE 
+		if(query.mdp === query.mdp2){
+			pass = "identique"
+		} else {
+			pass = "different"
+		}
 
     // SI PAS TROUVE, ON AJOUTE LE NOUVEAU COMPTE DANS LA LISTE DES COMPTES
 
@@ -78,7 +91,7 @@ var trait = function (req, res, query) {
 		taille_mdp = nouveauMembre.mdp.length;
         listeMembres[listeMembres.length] = nouveauMembre;
 			
-			if ( taille_compte >= 4 && taille_mdp >= 4 ) {
+			if ( taille_compte >= 4 && taille_mdp >= 4 && pass === "identique") {
         		contenu_fichier = JSON.stringify(listeMembres);
 
         		fs.writeFileSync("membres.json", contenu_fichier, 'utf-8');
@@ -87,35 +100,48 @@ var trait = function (req, res, query) {
 
         page = fs.readFileSync('modele_confirmation_inscription.html', 'UTF-8');
 
-        marqueurs = {};
         marqueurs.compte = query.compte;
         marqueurs.mdp = query.mdp;
         page = page.supplant(marqueurs);
 
    			 } else if (taille_compte < 4) {
         		page = fs.readFileSync( 'formulaire_inscription.html', 'utf-8');
-       			 marqueurs = {};
-       			 marqueurs.erreur = "ERREUR : Veuillez entrez un pseudo qui contient au moins 4 caractères";
+			 erreur = "<center><font color='blue' face='Times New Roman' size='3'><span class='info'><link rel='stylesheet' href='sms.css' type='text/css'/>Veuillez entrer un username qui contient au moins 4 caracteres</span></font></center>";
+			 marqueurs.erreur = erreur;
         		 marqueurs.compte = query.compte;
-       			 page = page.supplant(marqueurs);
-   			 } else if (taille_mdp <= 4) {
+			page = page.supplant(marqueurs);
+   			 } else if (taille_mdp <= 4 && pass === "identique") {
         		page = fs.readFileSync( 'formulaire_inscription.html', 'utf-8');
-       			marqueurs = {};
         		marqueurs.compte = query.compte;
-       	 		marqueurs.erreur = "ERREUR : Veuillez entrez un mot de passe qui contient au moins 4 caractères";
+			 erreur = "<center><font color='blue' face='Times New Roman' size='3'><span class='info'><link rel='stylesheet' href='sms.css' type='text/css'/>Veuillez entrer un password qui contient au moins 4 caracteres</span></font></center>";
+                         marqueurs.erreur = erreur;
+			page = page.supplant(marqueurs);
+			} else if (pass === "different" && taille_mdp >= 4) {
+				 page = fs.readFileSync( 'formulaire_inscription.html', 'utf-8');
+				marqueurs.compte = query.compte;
+				 erreur = "<center><font color='blue' face='Times New Roman' size='3'><span class='info'><link rel='stylesheet' href='sms.css' type='text/css'/>Les passwords ne sont pas identiques </span></font></center>";
+				 marqueurs.erreur = erreur;
 				page = page.supplant(marqueurs);
-			};
+			}else if (pass === "different") {
+                                 page = fs.readFileSync( 'formulaire_inscription.html', 'utf-8');
+                                marqueurs.compte = query.compte;
+                                 erreur = "<center><font color='blue' face='Times New Roman' size='3'><span class='info'><link rel='stylesheet' href='sms.css' type='text/css'/>Les passwords ne sont pas identiques </span></font></center>";
+                                 marqueurs.erreur = erreur;
+                                page = page.supplant(marqueurs);
+                        }
+
 	};	
 
     // ON RENVOIT UNE PAGE HTML 
 
-    if(trouve === true) {
+    if(trouve === true ) {
         // SI CREATION PAS OK, ON REAFFICHE PAGE FORMULAIRE AVEC ERREUR
 
         page = fs.readFileSync('formulaire_inscription.html', 'utf-8');
 
-        marqueurs = {};
-        marqueurs.erreur = "ERREUR : ce compte existe déjà";
+	erreur = "<center><font color='red' face='Times New Roman' size='3'><span class='error'><link rel='stylesheet' href='sms.css' type='text/css'/> Ce compte existe deja </span></font></center>";
+	 marqueurs.erreur = erreur;
+
         marqueurs.compte = query.compte;
         page = page.supplant(marqueurs);
 
@@ -127,5 +153,4 @@ var trait = function (req, res, query) {
 };
 
 //---------------------------------------------------------------------------
-
 module.exports = trait;

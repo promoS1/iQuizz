@@ -1,5 +1,5 @@
-//--CETTE-REQUETTE-VA-SERVIR-DE-REFRESH-A-CHAQUE-FOIS-LA-PAGE-DATTENTE-POUR-SAVOIR-SI-L-ADVERSAIRE-A-ACCEPTER-OU-REFUSER-LE-DEFI--
-//PAR-IQUIIZZ-LE-24/05/2018--
+//--CETTE REQUETTE VA SERVIR DE REFRESH A CHAQUE FOIS LA PAGE D'ATTENTE POUR SAVOIR SI L'ADVERSAIRE A ACCEPTER OU REFUSER LE DEFI
+//--PAR- Morgan MBA --LE-24/05/2018--
 "use strict";
 
 var fs = require("fs");
@@ -7,23 +7,30 @@ require = ("remedial");
 
 var trait = function (req, res, query) {
 
+    var contenu_fichier;
     var contenu_fichier1;
-    var liste;
+    var objet;
     var chaines;
     var partie;
     var liste_membres;
+    var liste_membres1;
     var adversaire;
+    var indice;
+    var id;
     var i;
+    var y;
+    var c;
     var j;
     var x;
     var compte;
     var compteur;
+    var etat;
     var question;
     var questions;
     var proposition;
-    var hote;
+    var theme;
     var page;
-    var marqueurs;
+    var marqueurs = {};
 
 
     // LECTURE DU JSON "salon.json" --> VOIR SI ÉTAT PASSE EN "attente" 
@@ -44,7 +51,37 @@ var trait = function (req, res, query) {
 	//LE PROCESSUS DE LA PARTIE MULTI S'EXECUTE  
 
 	if (liste_membres[x].etat === "joue") {
+	  contenu_fichier = fs.readFileSync("salon.json" , "utf-8");
+	    liste_membres1 = JSON.parse(contenu_fichier);
+		for (y = 0; y < liste_membres1.length; y++) {
+			if(liste_membres1[y].compte === query.compte) {
+				if(liste_membres1[y].id ==="id") {
+                                adversaire = query.compte;
+                                compte = liste_membres1[y].adversaire;
+                                marqueurs.adversaire = compte;
+                                marqueurs.theme = query.theme;
+                                marqueurs.compte = adversaire;
 
+				} else {
+                                compte = query.compte;
+                                adversaire = liste_membres1[y].adversaire;
+                                marqueurs.adversaire = adversaire;
+                                marqueurs.theme = query.theme;
+                                marqueurs.compte = compte;
+
+                                }
+                        }
+        }
+  //APPEL DU FICHIER PARTIE COMMUNE AU DEUX JOUEURS 
+
+    objet = fs.readFileSync("partie_"+ adversaire +"_vs_"+ compte +".json" ,"UTF-8");
+    partie = JSON.parse(objet);
+
+if( partie.compte === query.compte ) {
+         indice = partie.c;
+    } else if (partie.compte !== query.compte) {
+	 indice = partie.d;
+    }
 		page = fs.readFileSync("modele_questionnaire_multi.html", "utf-8");
 
 	 // CHOIX DU THEME PAR LE JOUEUR
@@ -54,14 +91,12 @@ var trait = function (req, res, query) {
 	 //ON SELECTIONNE UN j ALEATOIRE
 
 		questions = JSON.parse(chaines);
-		compteur = questions.length;
-		j = (Math.floor(Math.random() * compteur));
+		j = indice;
 
 	  //ON AFFICHE LE QUESTIONNAIRE
 
 		page = fs.readFileSync("modele_questionnaire_multi.html", "utf-8");
 
-		marqueurs = {};
 		marqueurs["question"] = questions[j].question;
 		marqueurs["proposition1"] = questions[j].proposition[0];
 		marqueurs["proposition2"] = questions[j].proposition[1];
@@ -75,12 +110,10 @@ var trait = function (req, res, query) {
 	} else if (liste_membres[x].etat === "connecté") {
 		page = fs.readFileSync("modele_refus_defie.html", "utf-8");
 	}
-
-		marqueurs = {};
 		marqueurs.compte = query.compte;
 		marqueurs.theme = query.theme;
-		marqueurs.mdp = query.mdp;
 		marqueurs.adversaire = adversaire;
+
 
 		page = page.supplant(marqueurs);		
 
