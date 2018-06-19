@@ -25,6 +25,7 @@ var trait = function (req, res, query) {
     var trouve;
     var trouve_s ;
 
+	marqueurs = {};
 
     // ON LIT LES COMPTES EXISTANTS
 
@@ -51,7 +52,6 @@ var trait = function (req, res, query) {
 
         page = fs.readFileSync('modele_accueil.html', 'utf-8');
 
-        marqueurs = {};
         erreur = "<center><font color='red' face='Times New Roman' size='3'><span class='error'><link rel='stylesheet' href='sms.css' type='text/css'/>compte ou mot de passe incorrect</span></font></center>";
         marqueurs.erreur = erreur;
         marqueurs.compte = query.compte;
@@ -60,8 +60,6 @@ var trait = function (req, res, query) {
     } else if (trouve === true) {
         // SI IDENTIFICATION OK, ON ENVOIE PAGE ACCUEIL MEMBRE
 
-        page = fs.readFileSync('modele_accueil_membre.html', 'UTF-8');
-    
 		//------------------------------------------------------------------
 		//----------------- TRAITEMENT  SALON DE JEU DEFIER------------------
 
@@ -92,10 +90,12 @@ var trait = function (req, res, query) {
             contenu_fichier_s = JSON.stringify(listeMembres_s);
             fs.writeFileSync("salon.json", contenu_fichier_s, "utf-8");
         }
-		page = fs.readFileSync('modele_accueil_membre.html', "utf-8");
+		page = fs.readFileSync("modele_loading.html" , "utf-8");
+		marqueurs.compte = query.compte;
+        page = page.supplant(marqueurs);
+
 
 	};
-		marqueurs = {};
 		marqueurs.compte = query.compte;
 		marqueurs.adversaire = query.adversaire;
         marqueurs.mdp = query.mdp;

@@ -133,7 +133,6 @@ var trait = function (req, res, query) {
 	objetf = fs.readFileSync("partie_"+ adversaire +"_vs_"+ compte +".json" ,"UTF-8");
 	partief = JSON.parse(objetf);
 
-console.log("indice a :"+ partief.a +" indice b " + partief.b +" compte: "+query.compte); 
  if ( partief.a.length === 4 && partief.b.length < 4 && query.compte === partief.joueur1 ) {
 	page = fs.readFileSync("modele_attendre_fini.html" , "UTF-8");
 
@@ -156,7 +155,13 @@ console.log("indice a :"+ partief.a +" indice b " + partief.b +" compte: "+query
                 marqueurs.score_j = partief.score1;
                 marqueurs.score_a = partief.score2;
                 marqueurs.commentaire = " Vous avez gagne contre " + partief.joueur2 ;
-                }
+                } else if (partie.score1 === partie.score2) {
+                marqueurs.compte = partie.joueur1;
+                marqueurs.adversaire = partie.joueur2;
+                marqueurs.score_j = partie.score1;
+                marqueurs.score_a = partie.score2;
+                marqueurs.commentaire = " Egalite !!! Vous avez les meme connaissances que " + partie.joueur2 +" sur le theme "+ partie.theme ;
+		}
 	page = page.supplant(marqueurs);
 } else if (partief.a.length === 4 && partief.b.length === 4 && query.compte === partief.joueur2 ) {
 	page = fs.readFileSync("modele_fin_duo.html" , "UTF-8");
@@ -172,7 +177,14 @@ console.log("indice a :"+ partief.a +" indice b " + partief.b +" compte: "+query
 		marqueurs.score_j = partief.score2;
 		marqueurs.score_a = partief.score1;
 		marqueurs.commentaire = " Vous avez perdu contre " + partief.joueur1; 
-		}
+		} else if (partie.score2 === partie.score1) {
+                marqueurs.compte = partie.joueur2;
+                marqueurs.adversaire = partie.joueur1;
+                marqueurs.score_j = partie.score2;
+                marqueurs.score_a = partie.score1;
+                marqueurs.commentaire = " Egalite !!! Vous avez les meme connaissances que " + partie.joueur1 +" sur le theme "+ partie.theme ;
+                }
+
 	page = page.supplant(marqueurs);
 };
 
