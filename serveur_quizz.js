@@ -18,6 +18,7 @@ var req_commencer = require("./req_commencer.js");
 var req_afficher_formulaire_inscription = require("./req_afficher_formulaire_inscription.js");
 var req_inscrire = require("./req_inscrire.js");
 var req_identifier = require("./req_identifier.js");
+var req_acces = require("./req_acces.js");
 var req_salon = require("./req_salon.js");
 var req_actualiser_salon = require("./req_actualiser_salon.js");
 var req_defier = require("./req_defier.js");
@@ -66,7 +67,10 @@ var traite_requete = function (req, res) {
                 break;
             case '/req_identifier':
                 req_identifier(req, res, query);
-                break;
+                break; 
+	case '/req_acces':
+	req_acces(req, res, query);
+	break;
             case '/req_salon':
                 req_salon(req, res, query);
                 break;
