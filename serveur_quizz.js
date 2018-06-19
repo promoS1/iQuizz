@@ -94,7 +94,6 @@ var traite_requete = function (req, res) {
 	case '/req_attendre_fin':
                 req_attendre_fin(req, res, query);
                 break;
-
 			case '/req_jouer_solo':
 				req_jouer_solo(req, res, query);
 				break;
