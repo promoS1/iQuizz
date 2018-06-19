@@ -79,8 +79,10 @@ var trait = function (req, res, query) {
 
 if( partie.compte === query.compte ) {
          indice = partie.c;
+	compteur = partie.a;
     } else if (partie.compte !== query.compte) {
 	 indice = partie.d;
+	compteur = partie.b;
     }
 		page = fs.readFileSync("modele_questionnaire_multi.html", "utf-8");
 
@@ -90,8 +92,8 @@ if( partie.compte === query.compte ) {
 
 	 //ON SELECTIONNE UN j ALEATOIRE
 
-		questions = JSON.parse(chaines);
-		j = indice;
+	questions = JSON.parse(chaines);
+	j = indice;
 
 	  //ON AFFICHE LE QUESTIONNAIRE
 
@@ -104,7 +106,7 @@ if( partie.compte === query.compte ) {
 		marqueurs["numero"] = j;
 
 		page = page.supplant(marqueurs);		
-	
+
 	} else if (liste_membres[x].etat ==="attente") {
 	 page = fs.readFileSync("modele_attendre_reponse.html", "utf-8");
 	} else if (liste_membres[x].etat === "connecté") {
