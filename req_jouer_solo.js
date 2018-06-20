@@ -45,7 +45,6 @@ var trait = function (req, res, query) {
 	} else if ( query.theme === "histoire" ) {
 		chaine = fs.readFileSync("questions_histoire.json","utf-8");
 	}
-
 	questions = JSON.parse(chaine);
 	compteur = questions.length;
 	i = Math.floor(Math.random() * compteur);
@@ -56,8 +55,12 @@ var trait = function (req, res, query) {
 
 	// AFFICHAGE DES QUESTIONS
 
-			page = fs.readFileSync('modele_questionnaire_solo.html', 'utf-8');
-
+			console.log( "compteur : " + registre[a].compteur);
+			if(registre[a].compteur ===  4) {
+				page = fs.readFileSync('modele_fin_solo.html', 'utf-8');
+			} else if(registre[a].compteur < 4) {
+				page = fs.readFileSync('modele_questionnaire_solo.html','utf-8');
+			console.log("test-page");
 			marqueurs = {};
 			marqueurs.compte = query.compte;
 			marqueurs.theme = query.theme;
@@ -79,13 +82,17 @@ var trait = function (req, res, query) {
 
 	objet = JSON.stringify(registre);
 	fs.writeFileSync("suivi_"+ query.compte +".json", objet ,"UTF-8");
+}	
 
-			page = page.supplant(marqueurs);
+	marqueurs["compte"] = query.compte;
+	marqueurs["theme"] = query.theme;
+	marqueurs["commentaire"] = "Vous avez terminé le Quizz : " + query.theme + " Avec un score de : " + registre[a].score;
+	page = page.supplant(marqueurs);
 
-			res.writeHead(200, {'Content-Type': 'text/html'});
-			res.write(page);
-			res.end();
-		};
+	res.writeHead(200, {'Content-Type': 'text/html'});
+	res.write(page);
+	res.end();
+	
+};
 //--------------------------------------------------------------------------
-
 module.exports = trait;
