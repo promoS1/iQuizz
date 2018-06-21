@@ -56,17 +56,24 @@ var trait = function (req, res, query) {
 		page = fs.readFileSync('modele_correction_solo.html', 'utf-8');
 		marqueurs["question"] = questions[i].question;
 		marqueurs["selection"] = questions[i].proposition[query.choix];	
-	if(query.choix === questions[i].bonne_reponse ){
-		marqueurs["commentaire"] ="Vous avez selectionne :{selection}" +"<br>"+"Bravo, c'est la bonne reponse" ;
-		registre[qc].score = registre[qc].score + 1;	
-	} else {
-		j = questions[i].bonne_reponse;
-		marqueurs["commentaire"] ="Vous avez selectionne :{selection}"+" <br>"+"Vous avez faux, la bonne reponse est "+questions[i].proposition[j];
-	}
+		if(query.choix === questions[i].bonne_reponse ){
+			marqueurs["commentaire"] ="Vous avez selectionne :{selection}" +"<br>"+"Bravo, c'est la bonne reponse" ;
+			registre[qc].score = registre[qc].score + 1;	
+		} else {
+			j = questions[i].bonne_reponse;
+			marqueurs["commentaire"] ="Vous avez selectionne :{selection}"+" <br>"+"Vous avez faux, la bonne reponse est "+questions[i].proposition[j];
+		}
 	} else if(registre[qc].compteur === 4) {
 		page = fs.readFileSync('modele_fin_solo.html',"UTF-8")
-		marqueurs["commentaire"] = "Vous avez terminé le Quizz : " + query.theme + " Avec un score de : " + registre[qc].score;
-	};
+			marqueurs["commentaire"] = "Vous avez terminé le Quizz : " + query.theme + " Avec un score de : " + registre[qc].score;
+	}
+
+	if(registre[qc].compteur < 4) {
+		registre[qc].nb_question_repondu.push(no_question);
+		registre[qc].compteur = registre[qc].compteur+1;
+	} else if(registre[qc].compteur === 4) {
+		registre[qc].compteur = registre[qc].compteur;
+	}
 	page = page.supplant(marqueurs);
 
 	objet = JSON.stringify(registre);

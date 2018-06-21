@@ -73,14 +73,15 @@ var trait = function (req, res, query) {
 
 
 		console.log("past-marq");
-		no_question = i; 
+		no_question = i;
+		/*
 		if(registre[a].compteur < 4) {
 			registre[a].nb_question_repondu.push(no_question);
 			registre[a].compteur = registre[a].compteur+1;
 		} else if(registre[a].compteur === 4) {
 			registre[a].compteur = registre[a].compteur;
 		}
-
+		*/
 		objet = JSON.stringify(registre);
 		fs.writeFileSync("suivi_"+ query.compte +".json", objet ,"UTF-8");
 	}	
