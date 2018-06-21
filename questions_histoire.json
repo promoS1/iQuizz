@@ -1,4 +1,4 @@
-:
+[
 { "question":"Quelle bataille fut perdue par Napoleon ?", "proposition":["Austerlitz","Wagram","Waterloo"],"bonne_reponse":2},
 { "question":"Ou Louis XVI est-il reconnu puis arreté après sa fuite ?", "proposition":["Roi-le-Chatel","Varennes","Blois"],"bonne_reponse":1},
 { "question":"Comment se nomme l'aviation allemande durant la Seconde Guerre Mondiale ?", "proposition":["La Wehrmacht","La Reich Aviazion","La Luftwaffe"],"bonne_reponse":2},

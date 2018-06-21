@@ -1,1 +1,1 @@
-[{"compte":"toto","etat":"joue","libre":"oui","adversaire":"didier"},{"compte":"didier","etat":"joue","libre":"oui","adversaire":"toto","id":"id"}]
+[{"compte":"test","etat":"connecté","libre":"non"}]
