@@ -1,0 +1,12 @@
+[
+{ "question":" Quel célébre dictateur dirigea l’URSS de 1920 à 1953?", "proposition":["Molotov","Staline","Hitler"],"bonne_reponse":1}, 
+{ "question":"Par quel mot désigne t-on une belle mère cruelle ?", "proposition":["Maratre","Godiche","Chenapan"],"bonne_reponse":0}, 
+{ "question":" Parmi les animaux suivant lequel est le plus rapide?", "proposition":["Cheval","Guepard","Leopard"],"bonne_reponse":1}, 
+{ "question":" Qui s’est déclarer 1er flic de France?", "proposition":["CHarle de Gaulle","Marine le Pen","Georges Clemenceau"],"bonne_reponse":2}, 
+{ "question":" Quel pays a décidé par referendum de quitter l’Union Européenne ?", "proposition":["Suéde","Pologne","Royaume-Uni"],"bonne_reponse":2},
+ { "question":"Combien de jour compte une année bisextile ?", "proposition":["364","365","366"],"bonne_reponse":2}, 
+{ "question":" Qui a composé 'L'Ode à la joie', l'hymne de l'Union européenne?", "proposition":["Beethoven","Mozart","Haydin"],"bonne_reponse":0}, 
+{ "question":" Parmis les marques de voiture suivantes, laquelle n’est pas allemande?", "proposition":["Audi","Mercedes","Ford"],"bonne_reponse":2}, 
+{ "question":" Quel est le plus petit Etat du monde?", "proposition":["Le Vatican","Monaco","Saint-Martin"],"bonne_reponse":0}, 
+{ "question":" Qui a écrit les misérables ?", "proposition":["Einstein","Voltaire","Victor Hugo"],"bonne_reponse":2}
+]

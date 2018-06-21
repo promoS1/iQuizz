@@ -1,6 +1,12 @@
 [
-{ "question":"Ballon d'or 2017 ?", "proposition":["Messi","CR7","neymar"],"bonne_reponse":1},
-{ "question":"Soulier d'or 2014 ?", "proposition":["Messi","CR7","robben"],"bonne_reponse":0},
-{ "question":"Quel est l'age de Michel platini ?", "proposition":["72","48","71"],"bonne_reponse":0},
-{ "question":"LE joueur le plus titre du football ?", "proposition":["Messi","CR7","neymar"],"bonne_reponse":1}
+{ "question":"Où eurent lieu les Jeux Olympiques de 1980  ?", "proposition":["Athènes","Calgary","Moscou"],"bonne_reponse":2}, 
+{ "question":"De quel pays le boomerang est-il originaire ?", "proposition":["Russie","Australie","Etats-Unis"],"bonne_reponse":1}, 
+{ "question":" Combien y a-t-il de joueurs sur le terrain dans une équipe de volley-ball?", "proposition":["3","4","6"],"bonne_reponse":2}, 
+{ "question":"Quel sport pratique un homme-grenouille ?", "proposition":["Plongee sous marine","ski-nautique","Chasse a la grenouille"],"bonne_reponse":0}, 
+{ "question":"Quel sport se joue avec une rondelle ?", "proposition":["Volley-ball","Hockey","Tenis"],"bonne_reponse":1}, 
+{ "question":" Comment s'appelle la discipline sportive consistant à sauter à l'aide d'un long bâton?", "proposition":["Saut a la perche","Saut en hauteur","Saut en longueur"],"bonne_reponse":0}, 
+{ "question":"Que collectionne un philatéliste  ?", "proposition":["Papillons","Autocollant","Timbres-postes"],"bonne_reponse":2}, 
+{ "question":" Qu'est-ce que l'on escalade si l'on pratique l'alpinisme?", "proposition":["Falaises","Montagnes","Arbres"],"bonne_reponse":1}, 
+{ "question":" Quel est le match d'ouverture de la Coupe du monde 2018?", "proposition":["Russie-Arabie Saoudite","Portugual-Russie","Russie-Maroc"],"bonne_reponse":0}, 
+{ "question":" Quelle est la marque du ballon de la Coupe du monde en Russie?", "proposition":["Adidas","Nike","Kappa"],"bonne_reponse":0}
 ]
