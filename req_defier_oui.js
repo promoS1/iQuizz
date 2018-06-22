@@ -75,7 +75,7 @@ var trait = function (req, res, query) {
 	liste.c = 0;//INDICE QUESTION DU JOUEUR (1)
 	liste.d = 0;//INDICE QUESTION DU JOUEUR (2)
 
-	liste.noq = [0,1,2,3];
+	liste.noq = [0,1,2,3,4,5,6,7,8,9];
 	partie = JSON.stringify(liste);
 	contenu = fs.writeFileSync("partie_"+ adversaire +"_vs_"+ query.compte +".json", partie ,"UTF-8");
 

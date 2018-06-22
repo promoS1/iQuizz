@@ -13,23 +13,32 @@ div {
 	top: 50px;
 	right: 10px;
 }
+ input[type=text], input[type=password] {
+    width: 100%;
+    padding: 10px 20px;
+    margin: 5px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
 span.img {
   position: absolute;
     left: 80px;
     top: 15px;
     z-index: -800;
 }
-} label
-      {
+ label {
 	font-family: "Times New Roman";
 	font-style: italic;
 	font-size: 20px;
 	vertical-align: top;
         display: inline-block;
         width: 50px;
-} body {
-    background-image: url("iQg.png");
-background-repeat: repeat-x';
+} 
+body {
+	background-image: url("iQg.png");
+	background-repeat: repeat-x;
 }
 </style>
 <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
@@ -41,9 +50,9 @@ background-repeat: repeat-x';
 <p>
 <div>
 <form action="/req_identifier" method="GET"> 
-    <b><label> Username </label> </br></br><input type="text" name="compte" value="{compte}"> 
+    <b><label> Username </label></br><input type="text" name="compte" value="{compte}"> 
     <br/><br/>
-    <label> Password </label> </br></br><input type="password" name="mdp" value="" placeholder="************">
+    <label> Password </label> </br><input type="password" name="mdp" value="" placeholder="************">
     <br/><p></b><center>
     <button name="action" value="Se connecter" class="button bouton">Se connecter</button>
 </form>

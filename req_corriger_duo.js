@@ -101,7 +101,7 @@ var trait = function (req, res, query) {
 	console.log(query.choix);
 	console.log(questions[i].proposition[query.choix]);
 
-	if ( query.choix == questions[i].bonne_reponse ) {
+if ( query.choix == questions[i].bonne_reponse ) {
 		marqueurs["commentaire"] = "Vous avez selectionne :{selection}" +"<br>"+"Bravo , c'est la bonne reponse";
 		score = score + 1;
 	} else {
@@ -123,6 +123,7 @@ var trait = function (req, res, query) {
          partie.b = compteur;
          partie.d = indice + 1;
     } 
+
 	objet = JSON.stringify(partie);
 	fs.writeFileSync("partie_"+ adversaire +"_vs_"+ compte +".json", objet , "UTF-8");
 
@@ -133,15 +134,15 @@ var trait = function (req, res, query) {
 	objetf = fs.readFileSync("partie_"+ adversaire +"_vs_"+ compte +".json" ,"UTF-8");
 	partief = JSON.parse(objetf);
 
- if ( partief.a.length === 4 && partief.b.length < 4 && query.compte === partief.joueur1 ) {
+ if ( partief.a.length === 10 && partief.b.length < 10 && query.compte === partief.joueur1 ) {
 	page = fs.readFileSync("modele_attendre_fini.html" , "UTF-8");
 
 	page = page.supplant(marqueurs);
-} else if (partief.a.length < 4 && partief.b.length === 4 && query.compte === partief.joueur2 ) {
+} else if (partief.a.length < 10 && partief.b.length === 10 && query.compte === partief.joueur2 ) {
 	page = fs.readFileSync("modele_attendre_fini.html" , "UTF-8");
 
 	page = page.supplant(marqueurs);
-} else if ( partief.a.length === 4 && partief.b.length === 4 && query.compte === partief.joueur1 ) {
+} else if ( partief.a.length === 10 && partief.b.length === 10 && query.compte === partief.joueur1 ) {
 	page = fs.readFileSync("modele_fin_duo.html" , "UTF-8");
 		if (partief.score1 < partief.score2) {
                 marqueurs.compte = partief.joueur1;
@@ -163,7 +164,7 @@ var trait = function (req, res, query) {
                 marqueurs.commentaire = " Egalite !!! Vous avez les meme connaissances que " + partie.joueur2 +" sur le theme "+ partie.theme ;
 		}
 	page = page.supplant(marqueurs);
-} else if (partief.a.length === 4 && partief.b.length === 4 && query.compte === partief.joueur2 ) {
+} else if (partief.a.length === 10 && partief.b.length === 10 && query.compte === partief.joueur2 ) {
 	page = fs.readFileSync("modele_fin_duo.html" , "UTF-8");
 		if (partief.score1 < partief.score2) {
 		marqueurs.compte = partief.joueur2;

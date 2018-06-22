@@ -1,6 +1,5 @@
-//---------------------------------------------------
-//-----------Salon-attente----------------------------
-//----------------------------------------------------
+//  REQUETE QUI PERMET D'ACCEDER AU SALON
+// PAR MORGAN MBA 
 "use strict";
 
 var fs = require("fs");
@@ -34,13 +33,14 @@ var trait = function (req, res, query) {
         if(listeMembres[i].compte === query.compte){
             test = true;
             listeMembres[i].etat = "connecté";
+		listeMembres[i].theme = query.theme;
             listeMembres[i].libre = "oui";
             fichier = JSON.stringify(listeMembres);
             fs.writeFileSync("salon.json", fichier, 'utf-8');
      }
     }
 
-	// NOUVEAU JOUEU  REJOIND LE SALON  
+	// NOUVEAU JOUEUR  REJOIND LE SALON  
 
     if(test === false){
         membre_salon = {};

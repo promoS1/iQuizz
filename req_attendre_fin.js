@@ -53,13 +53,13 @@ var trait = function (req, res, query) {
 	objet = fs.readFileSync("partie_"+ adversaire +"_vs_"+ compte +".json" ,"UTF-8");
 	partie = JSON.parse(objet);
 
-if ( partie.a.length === 4 && partie.b.length < 4 && query.compte === partie.joueur1 ) {
+if ( partie.a.length === 10 && partie.b.length < 10 && query.compte === partie.joueur1 ) {
 	page = fs.readFileSync("modele_attendre_fini.html" , "UTF-8");
 	marqueurs.compte = partie.joueur1;
 	marqueurs.theme = partie.theme;
 	marqueurs.adversaire = partie.joueur2;
 	page = page.supplant(marqueurs);
-} else if ( partie.a.length === 4 && partie.b.length === 4  && query.compte === partie.joueur1 ) {
+} else if ( partie.a.length === 10 && partie.b.length === 10  && query.compte === partie.joueur1 ) {
 		page = fs.readFileSync("modele_fin_duo.html" , "UTF-8");
                 if (partie.score1 < partie.score2) {
                 marqueurs.compte = partie.joueur1;
@@ -83,13 +83,13 @@ if ( partie.a.length === 4 && partie.b.length < 4 && query.compte === partie.jou
                 marqueurs.commentaire = " Egalite !!! Vous avez les meme connaissances que " + partie.joueur2 +" sur le theme "+ partie.theme ;
 	page = page.supplant(marqueurs);
                 }
-} else if (partie.a.length < 4 && partie.b.length === 4 && query.compte === partie.joueur2 ) {
+} else if (partie.a.length < 10 && partie.b.length === 10 && query.compte === partie.joueur2 ) {
 	page = fs.readFileSync("modele_attendre_fini.html" , "UTF-8");
 	marqueurs.compte = partie.joueur2;
 	marqueurs.theme = partie.theme;
 	marqueurs.adversaire = partie.joueur1;
 	page = page.supplant(marqueurs);
-} else if ( partie.a.length === 4 && partie.b.length === 4 && query.compte === partie.joueur2 ) {
+} else if ( partie.a.length === 10 && partie.b.length === 10 && query.compte === partie.joueur2 ) {
 		page = fs.readFileSync("modele_fin_duo.html" , "UTF-8");
                 if (partie.score1 < partie.score2) {
                 marqueurs.compte = partie.joueur2;
