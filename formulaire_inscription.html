@@ -3,12 +3,58 @@
 <head>
 <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
 <link rel="stylesheet" href="bouton.css" type="text/css"/>
-</head>
-<a href="req_commencer" class="retour"><img src="retour.png"></a>
-<h2>Formulaire de création de compte</h2>
+<style>
 
-<body>
-<p>
+body {
+background-image: url("iQg.png");
+background-repeat: repeat-x;
+}
+.header {
+	position: fixed;
+	background-color: #f1f1f1;
+	padding: 15px;
+	top: 0;
+	right: 0;
+	width: 760px;
+	}
+p.hh1  {
+text-align: right;
+}
+.footer {
+	background-color: #f1f1f1;
+	padding: -100px;
+position: fixed;
+bottom: 0;
+right: 0;
+width: 1500px;
+}
+h4.pied {
+position: relative;
+left: 0px;
+	font-family: "dacha";
+	text-align: right;
+} 
+div.corps {
+   background-color: lightgray;
+        border-radius: 10px;
+        width: 300px;
+        padding: 50px;
+        margin: 50px;
+        position: absolute;
+        top: 50px;
+        right: 10px;
+}
+</style>
+</head>
+
+<body >
+
+<div class="header">
+<p class="hh1">INSCRIPTION</p>
+</div>
+<a href="req_commencer" class="retour"><img src="retour.png"></a>
+
+<div class="corps">
 <form action="/req_inscrire" method="GET">
     <label>Username : </label><input type="text" name="compte" value="{compte}" placeholder = "pseudo visiteur">
     <br/>
@@ -20,6 +66,11 @@
     <button name="action" value="creer">Créer compte</button>
 </form><br><br>
 {erreur}
+
+</div>
+<div class="footer">
+	<h4 class="pied">  copyright PI-S01 iQuizz 2018   </h1>  
+</div>
 
 </body>
 </html>
