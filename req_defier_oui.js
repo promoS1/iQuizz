@@ -11,6 +11,8 @@ var trait = function (req, res, query) {
     var theme;
     var liste = {};
     var i;
+    var c;
+    var d;
     var x;
     var j;
     var compteur;
@@ -91,6 +93,9 @@ var trait = function (req, res, query) {
 	marqueurs.compte = query.compte;
 	marqueurs.theme = query.theme;
 	marqueurs.adversaire = adversaire;
+	marqueurs.score = "00%";
+	marqueurs.q = partie.c + 1;
+	marqueurs.q_a = partie.d + 1;
 	marqueurs["question"] = questions[i].question;
 	marqueurs["proposition1"] = questions[i].proposition[0];
 	marqueurs["proposition2"] = questions[i].proposition[1];
