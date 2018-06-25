@@ -3,10 +3,81 @@
 
 <head>
 <meta http-equiv='Content-Type' content='text/html; charset="utf-8' />
+<style type="text/css">
+
+.header {
+border-radius: 10px;
+padding: -5px;
+background-color: #f1f1f1;
+}
+div.compte {
+position:absolute;
+top 5px;
+left: 35px;
+}
+div.ia {
+position: fixed;
+top: 40px;
+right: 35px;
+}
+h2 {
+top: 0px;
+margin-left: 100px;
+font-size: 40px;
+font-family: "trade mark";
+}
+div.h4 {
+position: fixed;
+top: 60px;
+right: 100px;
+font-size: 30px;
+font-family: "trade mark";
+}
+div.img {
+position: fixed;
+top: 30px;
+right: 610px;
+}
+div.corpscj {
+	background-color: lightgray;
+        border-radius: 25px;
+        width: 600px;
+        padding: 50px;
+        top: 50px;
+        margin-right: 60px;
+        margin-left: 400px;
+        text-align: center;
+	font-family: "dacha";
+	font-size: "80px";
+}
+div.footer {
+text-align: center;
+font-size: 40px;
+font-family: "dacha";
+position: fixed;
+bottom: 5px;
+left: 450px;
+}
+body {
+        background-image: url("iQg.png");
+        background-repeat: repeat-x;
+}
+</style>
 </head>
 <body>
 
-    <h2>{question}</h2>
+<div class="header">
+
+	<div class="compte"><img src="users.png" height="90" width="60"></div>
+ <h2>{compte}<br>{q} </h2><div class="img"><img src="banniere.png" height="170" width="140"></div><div class="ia"><img src="users.png" height="90" width="60"></div> <div class="h4">{adversaire}<br>{q_a} </div>
+
+</div>
+
+<br><br><p>
+
+<div class="corpscj">
+
+    <h3>{question}</h3>
 <form action="/req_corriger_duo" method="GET">
 
     <p><input type="radio" name="choix" value="0" selected="selected">{proposition1}</p>
@@ -19,7 +90,10 @@
 <button>valider</button>
 
 </form>
-
+</div>
+<div class="footer">
+Pourcentage score : {score}
+</div>
 </body>
 </html>
 

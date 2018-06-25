@@ -15,6 +15,8 @@ var trait = function (req, res, query) {
     var theme;
     var choix;
     var i;
+    var q;
+    var q_a;
     var j;
     var a;
     var b;
@@ -104,9 +106,16 @@ var trait = function (req, res, query) {
 if ( query.choix == questions[i].bonne_reponse ) {
 		marqueurs["commentaire"] = "Vous avez selectionne :{selection}" +"<br>"+"Bravo , c'est la bonne reponse";
 		score = score + 1;
+	 marqueurs.q = partie.c + 1;
+	 marqueurs.score = score+"0 %";
+        marqueurs.q_a = partie.d + 1;
 	} else {
 		n = questions[i].bonne_reponse;
 		marqueurs["commentaire"] = "Vous avez selectionne :{selection}"+" <br>"+"Vous avez faux, la bonne reponse est "+questions[i].proposition[n];
+ marqueurs.q = partie.c + 1;
+        marqueurs.q_a = partie.d + 1;
+	 marqueurs.score = score+"0 %";
+
 	}
 
 	page = page.supplant(marqueurs);
