@@ -36,15 +36,7 @@ var trait = function (req, res, query) {
 
 	// TIRE AU SORT DU THEME CHOISI PAR LE JOUEUR
 
-	if ( query.theme === "sport" ) {	
-		chaine = fs.readFileSync("questions_sport.json","utf-8");
-	} else if ( query.theme === "pub" ) {
-		chaine = fs.readFileSync("questions_pub.json","utf-8");
-	} else if ( query.theme === "cg" ) {
-		chaine = fs.readFileSync("questions_cg.json","utf-8");
-	} else if ( query.theme === "histoire" ) {
-		chaine = fs.readFileSync("questions_histoire.json","utf-8");
-	}
+		chaine = fs.readFileSync("questions_"+a+".json","utf-8");
 	questions = JSON.parse(chaine);
 	compteur = questions.length;
 	i = Math.floor(Math.random() * compteur);
