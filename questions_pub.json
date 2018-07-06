@@ -1,8 +1,8 @@
 [
-{ "question":"Quel est le slogan de Citroen ? ", "proposition":["Technologie Creative","Creative Technologie","Un pas de plus vers la technologie"],"bonne_reponse":1},
-{ "question":"Quel est le slogan de Nespresso ?", "proposition":["Tout le bon gout du cafe","Qui y resisterait","What else ?"],"bonne_reponse":2},
+{ "question":"Quel est le slogan de Citroen ? ", "proposition":["Technologie Créative","Créative Technologie","Un pas de plus vers la technologie"],"bonne_reponse":1},
+{ "question":"Quel est le slogan de Nespresso ?", "proposition":["Tout le bon gout du café","Qui y resisterait","What else ?"],"bonne_reponse":2},
 { "question":"Quel est le slogan de Orange?", "proposition":["Plus loin","La vie change avec orange","Pour vous simplifier la vie"],"bonne_reponse":1},
-{ "question":"Quel est le slogan des Twinings ?", "proposition":["L’amour avec un grand T","Lamour est dans le pre","Lamour avec un grand The"],"bonne_reponse":2},
+{ "question":"Quel est le slogan des Twinings ?", "proposition":["L’amour avec un grand T","Lamour est dans le pré","Lamour avec un grand The"],"bonne_reponse":2},
 { "question":"Quel est le slogan de Coca-Cola ??", "proposition":["Ouvre un Coca-Cola, ouvre du bonheur."," Du bonheur en bouteille","Ouvre du bonheur, ouvre un Coca-Cola."],"bonne_reponse":0},
 { "question":"Quel est le slogan de Decathlon?", "proposition":["Toujours plus fort","A fond la forme","Depensez-vous "],"bonne_reponse":1},
 { "question":" Quel est le slogan de Pôle emploi ?", "proposition":["Notre mission : vous simplifier le travail","En faire plus pour vous. ","Notre priorite : vous aidez"],"bonne_reponse":0},
