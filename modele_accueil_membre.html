@@ -19,28 +19,33 @@ font-size: 25px;
 }
 div.body {
         background-color: lightgray;
-	padding-top: 13%;
+	padding-top: 05%;
 border-radius: 5px;
 text-align: right;
 	width: 65%;
+}
+button{
+border-radius: 5px;
+padding: 20px 10px;
 }
 span.wel{
 position: relative;
 top:-245px;
 right:200px;
 }
-div.solo{
-position: absolute;
-top: 250px;
+#solo{
+top: 165px;
+right:90px;
+position: relative;
 }
 div.duo{
-top: -185px;
+bottom: 250px;
 position: relative;
-right:15px
+right:660px
 }
 #img{
 position: relative;
-top:-145px;
+top:-100px;
 right:195px;
 }
 </style>
@@ -52,20 +57,19 @@ right:195px;
 <h2><span class="wel">Bienvenue  <em>{compte}<em>!</span></h2>
 	<p>
 	</p>
-	<div class="solo"><img id="so" src="solo.png" height="200" width="170"><strong><h2 style="text-align:center">THEME :</strong>
-		<form action="/req_jouer_solo" method="GET">
+	<div id="solo">
+<img id="so" src="solo.png" height="200" width="170">		<form action="/req_jouer_solo" method="GET">
 			<select name="theme">
-				<option value="sport" selected="selected">Sport</option>
 				<option value="pub">Publicite</option>
+				<option value="sport">Sport</option>
 				<option value="cg">Culture General</option>
 				<option value="histoire">Histoire</option>
 			</select> <br>
 				<input type="hidden" name="compte" value="{compte}">
-		<span class="center">
-				<button>Jouer Solo</button>
-		</span>
+				<p><button>Jouer Solo</button>
 	</form></div>
-	<br><br><hr><div class="duo"><img src="defi.png" height="180" width="150">
+	<br><br><hr><div class="duo"><img src="defi.png" height="180" width="150"><strong><h2>THEME :</h2></strong>
+
 		<form action="/req_salon" action="GET">
 		   <select name="theme">
 		    <option value="sport" selected="selected">Sport</option>
