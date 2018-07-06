@@ -6,7 +6,7 @@
 { "question":" Qui a decouvert l’amerique?", "proposition":["Magellan","Christophe Colombe","Francois 1er"],"bonne_reponse":1},
 { "question":" De quel pays Adolph Hitler a-t-il été chancellier?", "proposition":["Russie","Allemagne","France"],"bonne_reponse":1},
 { "question":" La guerre froide a vu s’affronter les Etats-Unis et …?", "proposition":["Russie","France","Chine"],"bonne_reponse":0},
-{ "question":" En quelle annee L’URSS a-t-elle eclatee?", "proposition":["1989","1991","1993"],"bonne_reponse":1},
+{ "question":" En quelle année L’URSS a-t-elle eclatée?", "proposition":["1989","1991","1993"],"bonne_reponse":1},
 { "question":"Dans quel pays Mao a-t-il pris le pouvoir en 1949 ?", "proposition":["Coree du sud","Vietnam","Chine"],"bonne_reponse":},
 { "question":" Que signifie le terme URSS?", "proposition":["Union des Royaumes Slovènes et Suédois","Union des Républiques Socialistes Soviétiques","Union de la Republique de Serbe et SOvietique"],"bonne_reponse":1}
 ]

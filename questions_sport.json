@@ -7,6 +7,6 @@
 { "question":" Comment s'appelle la discipline sportive consistant à sauter à l'aide d'un long bâton?", "proposition":["Saut a la perche","Saut en hauteur","Saut en longueur"],"bonne_reponse":0}, 
 { "question":"Que collectionne un philatéliste  ?", "proposition":["Papillons","Autocollant","Timbres-postes"],"bonne_reponse":2}, 
 { "question":" Qu'est-ce que l'on escalade si l'on pratique l'alpinisme?", "proposition":["Falaises","Montagnes","Arbres"],"bonne_reponse":1}, 
-{ "question":" Quel est le match d'ouverture de la Coupe du monde 2018?", "proposition":["Russie-Arabie Saoudite","Portugual-Russie","Russie-Maroc"],"bonne_reponse":0}, 
+{ "question":" Quel était le match d'ouverture de la Coupe du monde 2018?", "proposition":["Russie-Arabie Saoudite","Portugual-Russie","Russie-Maroc"],"bonne_reponse":0}, 
 { "question":" Quelle est la marque du ballon de la Coupe du monde en Russie?", "proposition":["Adidas","Nike","Kappa"],"bonne_reponse":0}
 ]
