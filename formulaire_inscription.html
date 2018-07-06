@@ -1,26 +1,35 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
 <link rel="stylesheet" href="bouton.css" type="text/css"/>
-<style>
+<title>Inscription</title>
+<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+<style type="text/css">
 
 body {
 background-image: url("iQg.png");
 background-repeat: repeat-x;
 }
-.header {
-	position: fixed;
+#header {
+	position: absolute;
 	background-color: #f1f1f1;
+	font-family: "sunset beach";
 	padding: 15px;
 	top: 0;
 	right: 0;
-	width: 760px;
-	}
-p.hh1  {
-text-align: right;
+	width: 100%;
+	text-align: center;
+	font-size: 35px;
+} input[type=text], input[type=password] {
+    width: 80%;
+    padding: 10px 20px;
+    margin: 5px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
 }
-.footer {
+#footer {
 	background-color: #f1f1f1;
 	padding: -100px;
 position: fixed;
@@ -28,48 +37,60 @@ bottom: 0;
 right: 0;
 width: 1500px;
 }
-h4.pied {
+#retour {
+position: absolute;
+left: 50px;
+}
+#pied {
 position: relative;
 left: 0px;
 	font-family: "dacha";
 	text-align: right;
 } 
-div.corps {
+#corps {
    background-color: lightgray;
         border-radius: 10px;
-        width: 300px;
+        width: 350px;
         padding: 50px;
         margin: 50px;
         position: absolute;
         top: 50px;
-        right: 10px;
-}
+        right: 20px;
+} #label {
+	font-family: "Times New Roman";
+        font-style: italic;
+        font-size: 20px;
+        vertical-align: top;
+        display: inline-block;
+        width: 50px;
+ }
 </style>
 </head>
 
 <body >
 
-<div class="header">
-<p class="hh1">INSCRIPTION</p>
+<div id="header">
+<a  href="req_commencer" class="retour"><img id="retour" src="retour.png"></a>
+	[INSCRIVEZ-VOUS !!]
 </div>
-<a href="req_commencer" class="retour"><img src="retour.png"></a>
+<br><br></br>
 
-<div class="corps">
+<div id="corps">
 <form action="/req_inscrire" method="GET">
-    <label>Username : </label><input type="text" name="compte" value="{compte}" placeholder = "pseudo visiteur">
-    <br/>
-    <label>Password : </label><input type="password" name="mdp" value="">
-    <br/>
-<label>Confirmer votre password : </label><input type="password" name="mdp2" value="">
-    <br/>
+    <label> Username </label></br><input type="text" name="compte" value="{compte}" placeholder = "pseudo ">
+    <br/></br>
+    <label> Password </label></br><input type="password" name="mdp" value="">
+    </br></br>
+<label> Confirmer votre password </label></br><input type="password" name="mdp2" value="">
+    <br/><p></b><center>
 
-    <button name="action" value="creer">Créer compte</button>
+    <button name="action" class="button bouton" value="creer">Créer compte</button> </center>
 </form><br><br>
-{erreur}
+{erreur} 
 
 </div>
-<div class="footer">
-	<h4 class="pied">  copyright PI-S01 iQuizz 2018   </h1>  
+<div id="footer">
+	<h4 id="pied">  copyright PI-S01 iQuizz 2018   </h1>  
 </div>
 
 </body>
