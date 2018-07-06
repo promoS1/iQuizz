@@ -5,26 +5,40 @@
 <style type="text/css">
 
 body {
-    background-image: url("tr.png");
+	background-image: url("tr1.png");
 }
+#corps{
+padding : 30px;
+margin : 30px;
+top : 50px;
+width : 500px;
+border-radius: 10px;
+font-family: "Times New Roman";
+font-size: 20px;
+color: #FFFFFF;
+}
+</style>
+</head>
+
 </style>
 <meta http-equiv='Content-Type' content='text/html'; charset='utf-8' />
 </head>
 <body>
-
-
-	<h2>{question}</h2>
+<center>
+<div id="corps">
+<h2>{question}</h2>
 <form action="/req_corriger_solo" method="GET">
-	
-	<p><input type="radio" name="choix" value="0">{proposition1}</input></p>
-	<p><input type="radio" name="choix" value="1">{proposition2}</input></p>
-	<p><input type="radio" name="choix" value="2">{proposition3}</input></p>
-	<input type="hidden" name="compte" value="{compte}">
-	<input type="hidden" name="theme" value="{theme}">
-	<input type="hidden" name="no_question" value="{numero}">
+
+<p><input type="radio" name="choix" value="0">{proposition1}</input></p>
+<p><input type="radio" name="choix" value="1">{proposition2}</input></p>
+<p><input type="radio" name="choix" value="2">{proposition3}</input></p>
+<input type="hidden" name="compte" value="{compte}">
+<input type="hidden" name="theme" value="{theme}">
+<input type="hidden" name="no_question" value="{numero}">
 <button>valider</button>
 
 </form> 
-
+<div id="corps">
+</center>
 </body>
 </html>
