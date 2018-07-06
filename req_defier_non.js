@@ -7,32 +7,32 @@ require = ("remedial");
 
 var trait = function (req, res, query) {
 
-    var compte;
-    var j;
-    var adversaire;
-    var contenu_fichier;
-    var liste_membres;
-    var page;
-    var etat;
-    var marqueurs;
+	var compte;
+	var j;
+	var adversaire;
+	var contenu_fichier;
+	var liste_membres;
+	var page;
+	var etat;
+	var marqueurs;
 
- //LE JOUEUR A ACCEPTE LE DEFI , ON L'ATTRIBUT L'ETAT JOUE
+	//LE JOUEUR A ACCEPTE LE DEFI , ON L'ATTRIBUT L'ETAT JOUE
 
-    contenu_fichier = fs.readFileSync("salon.json" , "utf-8");
-    liste_membres = JSON.parse(contenu_fichier);
-    for (j = 0; j < liste_membres.length; j++) {
-        if(liste_membres[j].compte === query.compte) {
-            adversaire = liste_membres[j].adversaire;
-            liste_membres[j].etat = "connecté" ;
+	contenu_fichier = fs.readFileSync("salon.json" , "utf-8");
+	liste_membres = JSON.parse(contenu_fichier);
+	for (j = 0; j < liste_membres.length; j++) {
+		if(liste_membres[j].compte === query.compte) {
+			adversaire = liste_membres[j].adversaire;
+			liste_membres[j].etat = "connecté" ;
 			liste_membres[j].libre = "non";
-            for (j = 0; j < liste_membres.length; j++) {
-                if (liste_membres[j].compte === adversaire) {
-                    liste_membres[j].etat = "connecté";
-                    liste_membres[j].libre = "non";
-                }
-            }
-        }
-    }
+				for (j = 0; j < liste_membres.length; j++) {
+					if (liste_membres[j].compte === adversaire) {
+						liste_membres[j].etat = "connecté";
+						liste_membres[j].libre = "non";
+					}
+				}
+		}
+}
 
     //ECRIE DANS SALON AVEC LE NOUVEAU STATUS DES JOUEURS
 

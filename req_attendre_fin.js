@@ -12,7 +12,9 @@ var trait = function (req, res, query) {
 	var adversaire;
 	var compte;
 	var marqueurs;
+	var comment;
 	var theme;
+	var time;
 	var y;
 	var a;
 	var b;
@@ -52,7 +54,7 @@ var trait = function (req, res, query) {
 
 	objet = fs.readFileSync("partie_"+ adversaire +"_vs_"+ compte +".json" ,"UTF-8");
 	partie = JSON.parse(objet);
-
+	time = Math.floor(Date.now() / 1000 );
 if ( partie.a.length === 10 && partie.b.length < 10 && query.compte === partie.joueur1 ) {
 	page = fs.readFileSync("modele_attendre_fini.html" , "UTF-8");
 	marqueurs.compte = partie.joueur1;
@@ -63,24 +65,29 @@ if ( partie.a.length === 10 && partie.b.length < 10 && query.compte === partie.j
 		page = fs.readFileSync("modele_fin_duo.html" , "UTF-8");
                 if (partie.score1 < partie.score2) {
                 marqueurs.compte = partie.joueur1;
+                marqueurs.time = time;
                 marqueurs.adversaire = partie.joueur2;
                 marqueurs.score_j = partie.score1;
                 marqueurs.score_a = partie.score2;
-                marqueurs.commentaire = " Vous avez perdu contre " + partie.joueur2 ;
+		comment = "<img src='lose.png' height='110' width='80'> Vous avez perdu contre " + partie.joueur2 ;
+                marqueurs.commentaire = comment;
 	page = page.supplant(marqueurs);
                 } else if (partie.score1 > partie.score2) {
                 marqueurs.compte = partie.joueur1;
                 marqueurs.adversaire = partie.joueur2;
+                marqueurs.time = time;
                 marqueurs.score_j = partie.score1;
                 marqueurs.score_a = partie.score2;
-                marqueurs.commentaire = " Vous avez gagne contre " + partie.joueur2 ;
+                comment = "<img src='win.png' height='110' width='80'> Vous avez gagne contre " + partie.joueur2 ;
+                marqueurs.commentaire = comment;
 	page = page.supplant(marqueurs);
                 } else if (partie.score1 === partie.score2) {
                 marqueurs.compte = partie.joueur1;
                 marqueurs.adversaire = partie.joueur2;
+                marqueurs.time = time;
                 marqueurs.score_j = partie.score1;
                 marqueurs.score_a = partie.score2;
-                marqueurs.commentaire = " Egalite !!! Vous avez les meme connaissances que " + partie.joueur2 +" sur le theme "+ partie.theme ;
+                marqueurs.commentaire = " Egalite !!! Vous avez le meme score que " + partie.joueur2 +" sur le theme "+ partie.theme ;
 	page = page.supplant(marqueurs);
                 }
 } else if (partie.a.length < 10 && partie.b.length === 10 && query.compte === partie.joueur2 ) {
@@ -94,23 +101,28 @@ if ( partie.a.length === 10 && partie.b.length < 10 && query.compte === partie.j
                 if (partie.score1 < partie.score2) {
                 marqueurs.compte = partie.joueur2;
                 marqueurs.adversaire = partie.joueur1;
+	marqueurs.time = time;
                 marqueurs.score_j = partie.score2;
                 marqueurs.score_a = partie.score1;
-                marqueurs.commentaire = " Vous avez gagne contre " + partie.joueur1 ;
+                comment = "<img src='win' height='110' width='80'> Vous avez gagne contre " + partie.joueur1 ;
+                marqueurs.commentaire = comment;
 	page = page.supplant(marqueurs);
                 } else if (partie.score1 > partie.score2) {
                 marqueurs.compte = partie.joueur2;
                 marqueurs.adversaire = partie.joueur1;
+	marqueurs.time = time;
                 marqueurs.score_j = partie.score2;
                 marqueurs.score_a = partie.score1;
-                marqueurs.commentaire = " Vous avez perdu contre " + partie.joueur1 ;
+                comment = "<img src='lose.png' height='110' width='80'> Vous avez perdu contre " + partie.joueur1 ;
+                marqueurs.commentaire = comment;
 	page = page.supplant(marqueurs);
 		} else if (partie.score2 === partie.score1) {
                 marqueurs.compte = partie.joueur2;
                 marqueurs.adversaire = partie.joueur1;
+	marqueurs.time = time;
                 marqueurs.score_j = partie.score2;
                 marqueurs.score_a = partie.score1;
-                marqueurs.commentaire = " Egalite !!! Vous avez les meme connaissances que " + partie.joueur1 +" sur le theme "+ partie.theme ;
+                marqueurs.commentaire = " Egalite !!! Vous avez le meme score que " + partie.joueur1 +" sur le theme "+ partie.theme ;
         page = page.supplant(marqueurs);
                 }
 	}

@@ -106,14 +106,14 @@ var trait = function (req, res, query) {
 
    			 } else if (taille_compte < 4) {
         		page = fs.readFileSync( 'formulaire_inscription.html', 'utf-8');
-			 erreur = "<center><font color='blue' face='Times New Roman' size='3'><span class='info'><link rel='stylesheet' href='sms.css' type='text/css'/>Veuillez entrer un username qui contient au moins 4 caracteres</span></font></center>";
+			 erreur = "<center><font color='blue' face='Times New Roman' size='3'><span class='info'><link rel='stylesheet' href='sms.css' type='text/css'/>username doit contenir au moins 4 caracteres</span></font></center>";
 			 marqueurs.erreur = erreur;
         		 marqueurs.compte = query.compte;
 			page = page.supplant(marqueurs);
    			 } else if (taille_mdp <= 4 && pass === "identique") {
         		page = fs.readFileSync( 'formulaire_inscription.html', 'utf-8');
         		marqueurs.compte = query.compte;
-			 erreur = "<center><font color='blue' face='Times New Roman' size='3'><span class='info'><link rel='stylesheet' href='sms.css' type='text/css'/>Veuillez entrer un password qui contient au moins 4 caracteres</span></font></center>";
+			 erreur = "<center><font color='blue' face='Times New Roman' size='3'><span class='info'><link rel='stylesheet' href='sms.css' type='text/css'/>Le  password doit contenir au moins 4 caracteres</span></font></center>";
                          marqueurs.erreur = erreur;
 			page = page.supplant(marqueurs);
 			} else if (pass === "different" && taille_mdp >= 4) {

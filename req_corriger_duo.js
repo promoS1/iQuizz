@@ -28,6 +28,7 @@ var trait = function (req, res, query) {
     var partief;
     var actif;
     var adversaire;
+	var comment;
     var joueur1;
     var joueur2;
     var bonne_reponse;
@@ -38,6 +39,7 @@ var trait = function (req, res, query) {
     var score1;
     var score2;
     var indice;
+    var indice_c;
     var nouveau;
     var objet;
     var objetf;
@@ -78,11 +80,13 @@ var trait = function (req, res, query) {
 		score = partie.score1;
 		compteur = partie.a;
 		indice = Number(partie.c);
+		indice_c = Number(partie.d);
 	} else if (partie.compte !== query.compte) {
 		actif = partie.adversaire;
 		score = partie.score2;
 		compteur = partie.b;
 		indice = Number(partie.d);
+		indice_c = Number(partie.c);
 	} 
 	
 
@@ -104,14 +108,14 @@ var trait = function (req, res, query) {
 	console.log(questions[i].proposition[query.choix]);
 
 if ( query.choix == questions[i].bonne_reponse ) {
-		marqueurs["commentaire"] = "Vous avez selectionne :{selection}" +"<br>"+"Bravo , c'est la bonne reponse";
+		marqueurs["commentaire"] = "Vous avez selectionne : {selection}" +"<br>"+" Bravo , c'est la bonne reponse";
 		score = score + 1;
-	 marqueurs.q = partie.c + 1;
+	 marqueurs.q = indice + 1;
 	 marqueurs.score = score+"0 %";
-        marqueurs.q_a = partie.d + 1;
+        marqueurs.q_a = indice_c + 1;
 	} else {
 		n = questions[i].bonne_reponse;
-		marqueurs["commentaire"] = "Vous avez selectionne :{selection}"+" <br>"+"Vous avez faux, la bonne reponse est "+questions[i].proposition[n];
+		marqueurs["commentaire"] = " Vous avez selectionne : {selection}"+" <br>"+" Vous avez faux, la bonne reponse est "+questions[i].proposition[n];
  marqueurs.q = partie.c + 1;
         marqueurs.q_a = partie.d + 1;
 	 marqueurs.score = score+"0 %";
@@ -158,13 +162,15 @@ if ( query.choix == questions[i].bonne_reponse ) {
                 marqueurs.adversaire = partief.joueur2;
                 marqueurs.score_j = partief.score1;
                 marqueurs.score_a = partief.score2;
-                marqueurs.commentaire = " Vous avez perdu contre " + partief.joueur2 ;
+                comment = "<img src='lose.png' height='110' width='80'> Vous avez perdu contre " + partief.joueur2 ;
+		marqueurs.commentaire = comment;
                 } else if (partief.score1 > partief.score2) {
                 marqueurs.compte = partief.joueur1;
                 marqueurs.adversaire = partief.joueur2;
                 marqueurs.score_j = partief.score1;
                 marqueurs.score_a = partief.score2;
-                marqueurs.commentaire = " Vous avez gagne contre " + partief.joueur2 ;
+                comment = "<img src='win.png' height='110' width='80'> Vous avez gagne contre " + partief.joueur2 ;
+		marqueurs.commentaire = comment;
                 } else if (partie.score1 === partie.score2) {
                 marqueurs.compte = partie.joueur1;
                 marqueurs.adversaire = partie.joueur2;
@@ -180,13 +186,15 @@ if ( query.choix == questions[i].bonne_reponse ) {
 		marqueurs.adversaire = partief.joueur1;
 		marqueurs.score_j = partief.score2;
 		marqueurs.score_a = partief.score1;
-		marqueurs.commentaire = " Vous avez gagne contre " + partief.joueur1;
+		comment = "<img src='win.png' height='110' width='80'> Vous avez gagne contre " + partief.joueur1;
+		marqueurs.commentaire = comment;
 		} else if (partief.score1 > partief.score2) {
 		marqueurs.compte = partief.joueur2;
 		marqueurs.adversaire = partief.joueur1;
 		marqueurs.score_j = partief.score2;
 		marqueurs.score_a = partief.score1;
-		marqueurs.commentaire = " Vous avez perdu contre " + partief.joueur1; 
+		comment = "<img src='lose.png' height='110' width='80'> Vous avez perdu contre " + partief.joueur1; 
+		marqueurs.commentaire = comment;
 		} else if (partie.score2 === partie.score1) {
                 marqueurs.compte = partie.joueur2;
                 marqueurs.adversaire = partie.joueur1;

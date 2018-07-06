@@ -103,19 +103,18 @@ var trait = function (req, res, query) {
 		 //ON SELECTIONNE UN j ALEATOIRE
 
 		questions = JSON.parse(chaines);
-		j = indice_c;
 
 		//ON AFFICHE LE QUESTIONNAIRE
 
 		page = fs.readFileSync("modele_questionnaire_multi.html", "utf-8");
 
-		marqueurs.q = j + 1;
+		marqueurs.q = indice_c + 1;
 		marqueurs.q_a = indice_a + 1;
-		marqueurs["question"] = questions[j].question;
-		marqueurs["proposition1"] = questions[j].proposition[0];
-		marqueurs["proposition2"] = questions[j].proposition[1];
-		marqueurs["proposition3"] = questions[j].proposition[2];
-		marqueurs["numero"] = j;
+		marqueurs["question"] = questions[indice_c].question;
+		marqueurs["proposition1"] = questions[indice_c].proposition[0];
+		marqueurs["proposition2"] = questions[indice_c].proposition[1];
+		marqueurs["proposition3"] = questions[indice_c].proposition[2];
+		marqueurs["numero"] = indice_c;
 		marqueurs["score"] = score+"0 %";
 		marqueurs["compte"] = query.compte;
 		marqueurs["adversaire"] = ia;

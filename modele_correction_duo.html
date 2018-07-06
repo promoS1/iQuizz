@@ -2,21 +2,92 @@
 <html>
 
 <head>
-<meta http-equiv="refresh" content="05 , url=/req_attendre_reponse?theme={theme}&compte={compte}&adversaire={adversaire}">
-<title>HTML Document Representation</title>
+<title> </title>
+<meta http-equiv='Content-Type' content='text/html'; charset='utf-8' />
+<meta http-equiv="refresh" content="08 , url=/req_attendre_reponse?theme={theme}&compte={compte}&adversaire={adversaire}">
+<style type="text/css">
+
+.header {
+border-radius: 10px;
+padding: 1px;
+background-color: #f1f1f1;
+position: relative;
+}
+div.compte {
+position:absolute;
+top 5px;
+left: 35px;
+}
+div.ia {
+position: absolute;
+top: 08px;
+right: 35px;
+}
+h2 {
+top: 0px;
+margin-left: 100px;
+font-size: 40px;
+font-family: "trade mark";
+}
+div.h4 {
+position: absolute;
+top: 08px;
+right: 100px;
+font-size: 30px;
+font-family: "trade mark";
+}
+div.img {
+position: absolute;
+top: 8px;
+right: 570px;
+}
+div.corpscj {
+        background-color: lightgray;
+        border-radius: 25px;
+        width: 600px;
+        padding: 30px;
+	top: 100px;
+        margin-right: 95px;
+        margin-bottom: 95px;
+        margin-left: 350px;
+        text-align: center;
+        font-family: "Times New Roman";
+	font-size: 20px;
+}
+div.footer {
+text-align: center;
+font-size: 40px;
+font-family: "dacha";
+left: 450px;
+top: 300px;
+}
+body {
+        background-image: url("iQg.png");
+        background-repeat: repeat-x;
+}
+</style>
 </head>
+
 <body>
+<div class="header">
 
-    <h2>{question}</h2>
-    <form method ="GET" action ="" >
-    {commentaire}
-    </p>
-<br>
- {actif} est en pleine partie;<br>
- Vous defiez {adversaire}
+<div class="compte"><img src="users.png" height="90" width="60"></div>
+<h2>{compte}</h2><div class="img"><img src="banniere.png" height="170" width="140"></div><div class="ia"><img src="users.png" height="90" width="60"></div> <div class="h4">{adversaire}</div>
 
+</div>
+<br><br>
+<div class="corpscj">
+<h2>{question}</h2>
+<form method ="GET" action ="" >
+{commentaire}
 </form>
+</div>
+
+<br>
+<div class="footer">
+Pourcentage score : {score}
+</div>
 
 </body>
-</html>
 
+</html>

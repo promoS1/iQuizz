@@ -7,30 +7,30 @@ require = ("remedial");
 
 var trait = function (req, res, query) {
 
-    var compte;
-    var theme;
-    var liste = {};
-    var i;
-    var c;
-    var d;
-    var x;
-    var j;
-    var compteur;
-    var chaines;
-    var partie;
-    var noq;
-    var contenu;
-    var adversaire;
+	var compte;
+	var theme;
+	var liste = {};
+	var i;
+	var c;
+	var d;
+	var x;
+	var j;
+	var compteur;
+	var chaines;
+	var partie;
+	var noq;
+	var contenu;
+	var adversaire;
 	var questions;
-    var proposition;
-    var contenu_fichier;
-    var liste_membres;
-    var proposition1;
-    var proposition2;
-    var proposition3;
-    var page;
-    var etat;
-    var marqueurs;
+	var proposition;
+	var contenu_fichier;
+	var liste_membres;
+	var proposition1;
+	var proposition2;
+	var proposition3;
+	var page;
+	var etat;
+	var marqueurs;
 
 	//LE JOUEUR A ACCEPTE LE DEFI , ON L'ATTRIBUT L'ETAT JOUE
 
@@ -40,12 +40,12 @@ var trait = function (req, res, query) {
 		if(liste_membres[j].compte === query.compte) {
 			adversaire = liste_membres[j].adversaire;
 			liste_membres[j].etat = "joue" ;
-			for (j = 0; j < liste_membres.length; j++) {
-				if (liste_membres[j].compte === adversaire) {
-					liste_membres[j].etat = "joue";
-					liste_membres[j].id = "id";
-				}	
-			}
+				for (j = 0; j < liste_membres.length; j++) {
+					if (liste_membres[j].compte === adversaire) {
+						liste_membres[j].etat = "joue";
+						liste_membres[j].id = "id";
+					}	
+				}
 		}
 	}
 
@@ -60,7 +60,7 @@ var trait = function (req, res, query) {
 
 	//ON SELECTIONNE UN i ALEATOIRE
 
-    questions = JSON.parse(chaines);
+	questions = JSON.parse(chaines);
 
 	//ON ECRIT LES INFOS DE LA PARTIE DANS LE JSON COMMUN AU DEUX JOUEURS
 
@@ -76,7 +76,6 @@ var trait = function (req, res, query) {
 	liste.b = [];//COMPTEUR DU DU JOUR HOTE (2)
 	liste.c = 0;//INDICE QUESTION DU JOUEUR (1)
 	liste.d = 0;//INDICE QUESTION DU JOUEUR (2)
-
 	liste.noq = [0,1,2,3,4,5,6,7,8,9];
 	partie = JSON.stringify(liste);
 	contenu = fs.writeFileSync("partie_"+ adversaire +"_vs_"+ query.compte +".json", partie ,"UTF-8");
@@ -84,8 +83,8 @@ var trait = function (req, res, query) {
 	//ON AFFICHE LE QUESTIONNAIRE
 
 	contenu_fichier = fs.readFileSync("partie_"+ adversaire +"_vs_"+ query.compte +".json",  "utf-8");
-    partie  = JSON.parse(contenu_fichier);
-	 i = partie.noq[0];
+	partie  = JSON.parse(contenu_fichier);
+	i = partie.noq[0];
 
 	page = fs.readFileSync("modele_questionnaire_multi.html", "utf-8");
 
@@ -102,14 +101,11 @@ var trait = function (req, res, query) {
 	marqueurs["proposition3"] = questions[i].proposition[2];
 	marqueurs["numero"] = i;
 
-    page = page.supplant(marqueurs);
+	page = page.supplant(marqueurs);
 
-
-    res.writeHead(200, {'Content-type': 'text/html'});
-    res.write(page);
-    res.end();
-
+	res.writeHead(200, {'Content-type': 'text/html'});
+	res.write(page);
+	res.end();
 };
 //==================================================
-
 module.exports = trait;

@@ -2,57 +2,84 @@
 <html>
 <head>
 <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
-<style>
+<style type="text/css">
 span.center {
 	display :inline-block;
 	width :auto;
 	height :25px;
 	padding :5px;
 }
-<style type="text/css">
 
 body {
-    background-image: url("tr.png");
+    background-image: url("iQg.png");
 }
-</style>
+a{
+text-align: right;
+font-size: 25px;
+}
+div.body {
+        background-color: lightgray;
+	padding-top: 13%;
+border-radius: 5px;
+text-align: right;
+	width: 65%;
+}
+span.wel{
+position: relative;
+top:-245px;
+right:200px;
+}
+div.solo{
+position: absolute;
+top: 250px;
+}
+div.duo{
+top: -185px;
+position: relative;
+right:15px
+}
+#img{
+position: relative;
+top:-145px;
+right:195px;
+}
 </style>
 </head>
 
 <body>
-<h2>Bienvenue !</h2>                                
-<p>
-<a href="/"><h4>Deconnexion</h4></a>
-</p>
-<p>
-Bonjour <em>{compte}<em>
-</p>
-
-<strong><h2 style="text-align:center">THEME :</strong>
-	<form action="/req_jouer_solo" method="GET">
-		<select name="theme">
-			<option value="sport" selected="selected">Sport</option>
-			<option value="pub">Publicite</option>
-			<option value="cg">Culture General</option>
-			<option value="histoire">Histoire</option>
+<center><div class="body">
+	<center><img id="img" src="logo.png" height="200" width="170"></center>
+<h2><span class="wel">Bienvenue  <em>{compte}<em>!</span></h2>
+	<p>
+	</p>
+	<div class="solo"><img id="so" src="solo.png" height="200" width="170"><strong><h2 style="text-align:center">THEME :</strong>
+		<form action="/req_jouer_solo" method="GET">
+			<select name="theme">
+				<option value="sport" selected="selected">Sport</option>
+				<option value="pub">Publicite</option>
+				<option value="cg">Culture General</option>
+				<option value="histoire">Histoire</option>
+			</select> <br>
+				<input type="hidden" name="compte" value="{compte}">
+		<span class="center">
+				<button>Jouer Solo</button>
+		</span>
+	</form></div>
+	<br><br><hr><div class="duo"><img src="defi.png" height="180" width="150">
+		<form action="/req_salon" action="GET">
+		   <select name="theme">
+		    <option value="sport" selected="selected">Sport</option>
+		    <option value="pub">Publicite</option>
+		    <option value="cg">Culture General</option>
+		    <option value="histoire">Histoire</option>
 		</select> <br>
 			<input type="hidden" name="compte" value="{compte}">
-	<span class="center">
-			<button>Jouer Solo</button>
-	</span>
-</form>
-<br><br><hr>
-	<form action="/req_salon" action="GET">
-	   <select name="theme">
-            <option value="sport" selected="selected">Sport</option>
-            <option value="pub">Publicite</option>
-            <option value="cg">Culture General</option>
-            <option value="histoire">Histoire</option>
-        </select> <br>
-		<input type="hidden" name="compte" value="{compte}">
-			<span class="center"> 
-			<button>Defier</button>
-			</span>	
-		</form>
+				<span class="center"> 
+				<button>Defier</button>
+				</span>	
+			</form></div>
+</div></center>
+	<a href="/"><h4>Deconnexion</h4></a>
 </body>
 </html>
 
